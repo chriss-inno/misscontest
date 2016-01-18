@@ -11,9 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','HomeController@index');
+Route::get('login','UserController@login');
+Route::post('login','UserController@postLogin');
+Route::post('forgotPassword','UserController@forgotPassword');
+
+//User modules
+Route::get('register','UserController@registration');
+Route::post('register','UserController@postRegister');
+Route::get('logout',['middleware' => 'auth', 'uses' =>'UserController@logout']);
+Route::get('home',['middleware' => 'auth', 'uses' =>'HomeController@index']);
+
 
 /*
 |--------------------------------------------------------------------------

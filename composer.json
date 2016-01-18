@@ -6,7 +6,15 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*"
+        "laravel/framework": "5.2.*",
+        "maatwebsite/excel": "~2.0.0",
+        "nette/mail": "2.3.*@dev",
+        "phpoffice/phpword": "dev-master",
+        "barryvdh/laravel-dompdf": "0.6.*",
+        "laravelcollective/html": "5.2.*",
+        "doctrine/dbal": "2.5.0",
+        "intervention/image": "^2.3",
+        "intervention/imagecache": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
