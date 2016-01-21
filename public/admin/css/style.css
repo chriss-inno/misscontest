@@ -57,12 +57,12 @@ a, a:hover, a:focus {
 .form-signin h2.form-signin-heading {
     margin: 0;
     padding:20px 15px;
-    text-align: center;
+    text-align: left;
     background: #41cac0;
     border-radius: 5px 5px 0 0;
     -webkit-border-radius: 5px 5px 0 0;
     color: #fff;
-    font-size: 18px;
+    font-size: 24px;
     text-transform: uppercase;
     font-weight: 300;
     font-family: 'Open Sans', sans-serif;
@@ -3177,6 +3177,10 @@ input:focus:invalid:focus, textarea:focus:invalid:focus, select:focus:invalid:fo
     display: inline;
     margin:5px 0px;
     width: auto;
+    color: #B94A48;
+}
+
+.error {
     color: #B94A48;
 }
 

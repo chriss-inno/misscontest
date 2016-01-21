@@ -1,10 +1,18 @@
 var Script = function () {
-
-    $.validator.setDefaults({
-        submitHandler: function() { alert("submitted!"); }
-    });
-
     $().ready(function() {
+
+        //Validate user login
+        $("#UserLogin").validate({
+            rules: {
+                username: "required",
+                password: "required"
+            },
+            messages: {
+                username: "Please enter your username",
+                password: "Please enter your password"
+            }
+        });
+
         // validate the comment form when it is submitted
         $("#commentForm").validate();
 

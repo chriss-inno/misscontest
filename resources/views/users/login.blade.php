@@ -27,74 +27,119 @@
 
 <body class="login-body">
 
-<div class="container">
 
-    {!! Form::open(array('url'=>'login','class'=>'form-signin','role'=>'form','id'=>'UserLogin')) !!}
-        <h2 class="form-signin-heading">sign in now</h2>
+<div class="container">
+    <div style="max-width: 330px; margin-left: auto; margin-right: auto">
+        {!! Form::open(array('url'=>'login','class'=>'form-signin','role'=>'form','id'=>'UserLogin')) !!}
+        <h2 class="form-signin-heading">{!! HTML::image("admin/img/secrecy-icon.png")!!}<strong> sign in now</strong></h2>
         <div class="login-wrap">
-            <input type="text" class="form-control" placeholder="User ID" autofocus name="username" required>
-            <input type="password" class="form-control" placeholder="Password" name="password" required>
+
+            @if(session('message'))
+                <div class="alert fade in alert-danger">
+                    <i class="icon-remove close" data-dismiss="alert"></i>
+                    {{session('message')}}
+                </div>
+            @endif
+            <input type="text" name="username"  id="username" class="form-control" placeholder="User ID" autofocus autocomplete=off required>
+            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required autocomplete=off>
             <label class="checkbox">
                 <input type="checkbox" value="remember-me"> Remember me
-                <span class="pull-right">
+                 <span class="pull-right">
                     <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
 
                 </span>
+
             </label>
             <button class="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
 
         </div>
-
-        <!-- Modal -->
+        {!! Form::close() !!}
+                <!-- Modal -->
         <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
+                    {!! Form::open(array('url'=>'forgotPassword','role'=>'form','id'=>'forgotPassword')) !!}
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Forgot Password ?</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Enter your e-mail address below to reset your password.</p>
-                        <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
-
+                        <p><span class="text-center "><h4 class="text-center text-info">Enter your email and user name to reset your account</h4> </span> </p>
+                        <div class="form-group">
+                            <label for="status">Enter your Username</label>
+                            <input type="text" name="psusername" id="psusername" placeholder="Username" autocomplete="off" class="form-control placeholder-no-fix" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Enter your e-mail address</label>
+                            <input type="email" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix" required>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-                        <button class="btn btn-success" type="button">Submit</button>
+                        <button data-dismiss="modal" class="btn btn-danger" type="button">Cancel</button>
+                        <button class="btn btn-primary" type="submit">Submit</button>
                     </div>
+                    {!! Form::close() !!}
+
+                    {!!HTML::script("admin/js/jquery.js" ) !!}
+                    {!!HTML::script("admin/js/bootstrap.min.js" ) !!}
+                    {!!HTML::script("admin/js/jquery.dcjqaccordion.2.7.js" ) !!}
+                    {!!HTML::script("admin/js/jquery.scrollTo.min.js" ) !!}
+                    {!!HTML::script("admin/js/jquery.nicescroll.js") !!}
+                    {!!HTML::script("admin/js/jquery.validate.min.js" ) !!}
+                    {!!HTML::script("admin/js/respond.min.js"  ) !!}
+
+                            <!--common script for all pages-->
+                    {!!HTML::script("admin/js/common-scripts.js" ) !!}
+
+                            <!--script for this page-->
+                    {!!HTML::script("admin/js/form-validation-script.js" ) !!}
+                    <script>
+                        //Validate user login
+                        $("#forgotPassword").validate({
+                            rules: {
+
+                                psusername: {
+                                    required: true
+                                },
+                                email: {
+                                    required: true,
+                                    email: true
+                                }
+                            },
+                            messages: {
+                                psusername: {
+                                    required: "Please enter your username",
+                                },
+                                email: {
+                                    required: "Please provide a password",
+                                    email: "Enter valid email address"
+                                }
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </div>
         <!-- modal -->
 
-    {!! Form::close() !!}
 
+    </div>
 
 </div>
 
-
-
-<!-- js placed at the end of the document so the pages load faster -->
- {!!HTML::script("admin/js/jquery.js")!!}
- {!!HTML::script("admin/js/bootstrap.min.js")!!}
+         <!-- js placed at the end of the document so the pages load faster -->
+{!!HTML::script("admin/js/jquery.js" ) !!}
+{!!HTML::script("admin/js/bootstrap.min.js" ) !!}
+{!!HTML::script("admin/js/jquery.dcjqaccordion.2.7.js" ) !!}
+{!!HTML::script("admin/js/jquery.scrollTo.min.js" ) !!}
+{!!HTML::script("admin/js/jquery.nicescroll.js") !!}
 {!!HTML::script("admin/js/jquery.validate.min.js" ) !!}
 {!!HTML::script("admin/js/respond.min.js"  ) !!}
-{!!HTML::script("admin/js/form-validation-script.js") !!}
-<script>
-    //Validate user login
-    $("#UserLogin").validate({
-        rules: {
-            username:required,
-            password:required
-        },
-        messages: {
-                username: "Please provide a username",
-                password: "Please provide a password"
 
-        }
-    });
-</script>
+        <!--common script for all pages-->
+{!!HTML::script("admin/js/common-scripts.js" ) !!}
 
-
+        <!--script for this page-->
+{!!HTML::script("admin/js/form-validation-script.js" ) !!}
 </body>
 </html>

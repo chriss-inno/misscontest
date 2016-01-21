@@ -14,6 +14,18 @@ class CreateContestantsTable extends Migration
     {
         Schema::create('contestants', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('middle_name')->nullable();
+            $table->string('nick_name')->nullable();
+            $table->string('email')->unique();
+            $table->integer('category_id')->nullable();
+            $table->string('registration_date');
+            $table->mediumText('profile_note');
+            $table->string('status');
+            $table->date('dob');
+            $table->string('blocked')->default('No');
+            $table->date('contest_year');
             $table->timestamps();
         });
     }

@@ -14,6 +14,14 @@ class CreateContestantGalleriesTable extends Migration
     {
         Schema::create('contestant_galleries', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('contestant_id');
+            $table->string('gallery_path');
+            $table->integer('position');
+            $table->integer('created_by');
+            $table->dateTime('publish_up');
+            $table->dateTime('publish_down');
+            $table->integer('hits');
+            $table->integer('access');
             $table->timestamps();
         });
     }

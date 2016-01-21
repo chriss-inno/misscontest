@@ -15,6 +15,7 @@ Route::get('/','HomeController@index');
 Route::get('login','UserController@login');
 Route::post('login','UserController@postLogin');
 Route::post('forgotPassword','UserController@forgotPassword');
+Route::get('forgotPassword','UserController@home');
 
 //User modules
 Route::get('register','UserController@registration');

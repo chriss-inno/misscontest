@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContentantGalleriesTable extends Migration
+class CreateUserLoginActivitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,11 @@ class CreateContentantGalleriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('contentant_galleries', function (Blueprint $table) {
+        Schema::create('user_login_activities', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('activity');
+            $table->integer('userid');
+            $table->dateTime('dat_logged');
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ class CreateContentantGalleriesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('contentant_galleries');
+        Schema::drop('user_login_activities');
     }
 }
