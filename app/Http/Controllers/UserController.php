@@ -134,22 +134,25 @@ class UserController extends Controller
         {
             if(Auth::user()->blocked ==1 || Auth::user()->status=="Inactive")
             {
+
                 Auth::logout();
-                return redirect('login')->with('message', 'Login Failed you don\'t have Access to login please  Contact support team');
+                return redirect()->back()->with('message', 'Login Failed you don\'t have Access to login please  Contact support team');
             }
             else
             {
-                $user= User::find(Auth::user()->id);
-                $user->last_success_login=date("Y-m-d h:i:s");
-                $user->save();
 
-                //Audit log
+                 $user= User::find(Auth::user()->id);
+                 $user->last_success_login=date("Y-m-d h:i:s");
+                 $user->save();
+
+               // //Audit log
                 return redirect()->intended('home');
 
             }
 
         }
         else {
+
             return redirect()->back()->with('message', 'Login Failed,Invalid username or password');
         }
 

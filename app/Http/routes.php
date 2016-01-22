@@ -11,17 +11,10 @@
 |
 */
 
-Route::get('/','HomeController@index');
-Route::get('login','UserController@login');
-Route::post('login','UserController@postLogin');
-Route::post('forgotPassword','UserController@forgotPassword');
-Route::get('forgotPassword','UserController@home');
 
-//User modules
-Route::get('register','UserController@registration');
-Route::post('register','UserController@postRegister');
-Route::get('logout',['middleware' => 'auth', 'uses' =>'UserController@logout']);
-Route::get('home',['middleware' => 'auth', 'uses' =>'HomeController@index']);
+
+
+
 
 
 /*
@@ -35,6 +28,21 @@ Route::get('home',['middleware' => 'auth', 'uses' =>'HomeController@index']);
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
+Route::group(array('middleware' => 'web'), function()
+{
+    //put admin routes here
+    Route::get('/','HomeController@index');
+    Route::get('logout','UserController@logout');
+    Route::get('login','UserController@login');
+    Route::post('login','UserController@postLogin');
+    Route::post('forgotPassword','UserController@forgotPassword');
+    Route::get('forgotPassword','UserController@home');
+    Route::get('home',['middleware' => 'auth', 'uses' =>'HomeController@index']);
+
+    //Contestants
+    Route::get('home',['middleware' => 'auth', 'uses' =>'HomeController@index']);
+    //User modules
+    Route::get('register','UserController@registration');
+    Route::post('register','UserController@postRegister');
 });
+

@@ -22,13 +22,8 @@ class HomeController extends Controller
 
      public function index()
      {
-         if(Auth::guest())
-         {
-             return view('users.login');
-         }
-         else
-         {
-             return redirect('home');
-         }
+
+             return view('users.admin');
+
      }
 }
