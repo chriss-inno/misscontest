@@ -142,33 +142,74 @@
     {!!HTML::script("admin/js/sparkline-chart.js")!!}
     {!!HTML::script("admin/js/easy-pie-chart.js")!!}
     {!!HTML::script("admin/js/count.js")!!}
-    <script>
-
-        //knob
-        $(".knob").knob();
-
-    </script>
-    <script>
-
-        //owl carousel
-
+    {!!HTML::script("admin/assets/highcharts/js/highcharts.js") !!}
+    <script type="text/javascript" charset="utf-8">
         $(document).ready(function() {
-            $("#owl-demo").owlCarousel({
-                navigation : true,
-                slideSpeed : 300,
-                paginationSpeed : 400,
-                singleItem : true,
-                autoPlay:true
 
+            $(function () {
+                $('#highchart').highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Registered Users per Month'
+                    },
+                    xAxis: {
+                        categories: [
+                            <?php $month = strtotime('2011-12-12');?>
+                                    @for($i=1;$i<=12; $i++)
+                            <?php $month = strtotime('+1 month', $month); ?>
+                                    '{{date('F', $month)}}',
+                            @endfor
+                        ],
+                        crosshair: true
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Number of users'
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0.2,
+                            borderWidth: 0
+                        }
+                    },
+                    <?php
+                            $m3=date("Y-m-d",strtotime(date("Y-m-d").'-3 months'));
+                            $data3="";
+                            $month = strtotime('2011-12-12');
+                            for($i=1;$i<=12; $i++)
+                            {
+                                $month = strtotime('+1 month', $month);
+                                $cdate=date("Y")."-".date('m', $month)."-01";
+                                $usersc=\App\User::where(\DB::raw('YEAR(registration_date)'), '=', date('Y'))
+                                        ->where(\DB::raw('MONTH(registration_date)'), '=',date('n',strtotime($cdate)))->get();
+                                $data3.=count($usersc).",";
+                            }
+                            $data3=substr($data3,0,strlen($data3)-1);
+                            ?>
+                    series: [{
+                        name: 'Users',
+                        data: [<?php echo $data3?>]
+
+                    }]
+                });
             });
-        });
 
-        //custom select box
-
-        $(function(){
-            $('select.styled').customSelect();
-        });
-
+        } );
     </script>
     @stop
 @section('contents')
@@ -182,7 +223,7 @@
                         </div>
                         <div class="value">
                             <h1 class="count">
-                                0
+                                {{count(\App\User::all())}}
                             </h1>
                             <p>Members</p>
                         </div>
@@ -195,7 +236,7 @@
                         </div>
                         <div class="value">
                             <h1 class=" count2">
-                                0
+                                {{count(\App\Contestant::all())}}
                             </h1>
                             <p>Contestants</p>
                         </div>
@@ -239,10 +280,11 @@
                            <div class="post-info">
                                <span class="arrow-pro right"></span>
                                <div class="panel-body">
+                                   <?php $contest=\App\Contestant::orderBy('hints','Desc')->first();?>
                                    <h1><strong>popular</strong> <br> Contestant of this week</h1>
                                    <div class="desk yellow">
-                                       <h3>Dimond Ring</h3>
-                                       <p>Lorem ipsum dolor set amet lorem ipsum dolor set amet ipsum dolor set amet</p>
+                                       <h3>{{$contest->first_name." ".$contest->last_name}}</h3>
+                                       <p>{{$contest->profile_note}}</p>
                                    </div>
                                </div>
                            </div>
@@ -250,96 +292,21 @@
                        <aside class="post-highlight yellow v-align">
                            <div class="panel-body text-center">
                                <div class="pro-thumb">
-                                   <img src="{{ asset('admin/img/ring.jpg') }}" alt="">
+                                   @if($contest->profile_image !="")
+                                       <img src="{{ asset('admin/img/contestant_galley/'.$contest->profile_image) }}" alt="">
+                                       @else
+                                         <img src="{{ asset('admin/img/ring.jpg') }}" alt="">
+                                       @endif
                                </div>
                            </div>
                        </aside>
                    </section>
-                   <!--latest product info end-->
-                   <!--twitter feedback start-->
-                   <section class="panel post-wrap pro-box">
-                       <aside class="post-highlight terques v-align">
-                           <div class="panel-body">
-                               <h2>Flatlab is new model of admin dashboard <a href="javascript:;"> http://demo.com/</a> 4 days ago  by jonathan smith</h2>
-                           </div>
-                       </aside>
-                       <aside>
-                           <div class="post-info">
-                               <span class="arrow-pro left"></span>
-                               <div class="panel-body">
-                                   <div class="text-center twite">
-                                       <h1>Twitter Feed</h1>
-                                   </div>
 
-                                   <footer class="social-footer">
-                                       <ul>
-                                           <li>
-                                               <a href="#">
-                                                   <i class="fa fa-facebook"></i>
-                                               </a>
-                                           </li>
-                                           <li class="active">
-                                               <a href="#">
-                                                   <i class="fa fa-twitter"></i>
-                                               </a>
-                                           </li>
-                                           <li>
-                                               <a href="#">
-                                                   <i class="fa fa-google-plus"></i>
-                                               </a>
-                                           </li>
-                                           <li>
-                                               <a href="#">
-                                                   <i class="fa fa-pinterest"></i>
-                                               </a>
-                                           </li>
-                                       </ul>
-                                   </footer>
-                               </div>
-                           </div>
-                       </aside>
-                   </section>
-                   <!--twitter feedback end-->
                    </div>
                    </div>
                <div class="row">
                    <div class="col-lg-12">
-                       <section class="panel">
-                           <div class="panel-body">
-                               <ul class="summary-list">
-                                   <li>
-                                       <a href="javascript:;">
-                                           <i class=" fa fa-shopping-cart text-primary"></i>
-                                           1 Purchase
-                                       </a>
-                                   </li>
-                                   <li>
-                                       <a href="javascript:;">
-                                           <i class="fa fa-envelope text-info"></i>
-                                           15 Emails
-                                       </a>
-                                   </li>
-                                   <li>
-                                       <a href="javascript:;">
-                                           <i class=" fa fa-picture-o text-muted"></i>
-                                           2 Photo Upload
-                                       </a>
-                                   </li>
-                                   <li>
-                                       <a href="javascript:;">
-                                           <i class="fa fa-tags text-success"></i>
-                                           19 Sales
-                                       </a>
-                                   </li>
-                                   <li>
-                                       <a href="javascript:;">
-                                           <i class="fa fa-microphone text-danger"></i>
-                                           4 Audio
-                                       </a>
-                                   </li>
-                               </ul>
-                           </div>
-                       </section>
+                       <div id="highchart" style="height:400px;"></div>
                    </div>
                </div>
            </div>

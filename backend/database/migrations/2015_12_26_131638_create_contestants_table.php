@@ -19,13 +19,21 @@ class CreateContestantsTable extends Migration
             $table->string('middle_name')->nullable();
             $table->string('nick_name')->nullable();
             $table->string('email')->unique();
+            $table->string('phone');
+            $table->integer('region_id');
+            $table->integer('district_id');
+            $table->string('city')->nullable();
+            $table->string('zone')->nullable();
+            $table->string('address')->nullable();
             $table->integer('category_id')->nullable();
-            $table->string('registration_date');
-            $table->mediumText('profile_note');
-            $table->string('status');
-            $table->date('dob');
+            $table->date('registration_date');
+            $table->mediumText('profile_note')->nullable();
+            $table->string('profile_image')->nullable();;
+            $table->string('status')->nullable();;
+            $table->date('dob')->nullable();;
             $table->string('blocked')->default('No');
-            $table->date('contest_year');
+            $table->integer('contest_year');
+            $table->integer('hints');
             $table->timestamps();
         });
     }

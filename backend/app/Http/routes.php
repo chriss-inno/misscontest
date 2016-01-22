@@ -31,7 +31,7 @@
 Route::group(array('middleware' => 'web'), function()
 {
     //put admin routes here
-    Route::get('/','HomeController@index');
+    Route::get('/',['middleware' => 'auth', 'uses' =>'HomeController@index']);
     Route::get('logout','UserController@logout');
     Route::get('login','UserController@login');
     Route::post('login','UserController@postLogin');
@@ -40,9 +40,19 @@ Route::group(array('middleware' => 'web'), function()
     Route::get('home',['middleware' => 'auth', 'uses' =>'HomeController@index']);
 
     //Contestants
-    Route::get('home',['middleware' => 'auth', 'uses' =>'HomeController@index']);
+    Route::get('contestant/create',['middleware' => 'auth', 'uses' =>'ContestantController@create']);
+    Route::post('contestant/create',['middleware' => 'auth', 'uses' =>'ContestantController@store']);
+    Route::get('contestant/manage',['middleware' => 'auth', 'uses' =>'ContestantController@index']);
+    Route::get('contestant/reviews',['middleware' => 'auth', 'uses' =>'ContestantController@getReviews']);
+    Route::get('contestant/blog',['middleware' => 'auth', 'uses' =>'ContestantController@getBlog']);
+    Route::get('contestant/edit/{id}',['middleware' => 'auth', 'uses' =>'ContestantController@edit']);
+    Route::post('contestant/edit',['middleware' => 'auth', 'uses' =>'ContestantController@update']);
+    Route::get('contestant/remove/{id}',['middleware' => 'auth', 'uses' =>'ContestantController@destroy']);
+    Route::get('contestant/show/{id}',['middleware' => 'auth', 'uses' =>'ContestantController@show']);
+
+
     //User modules
-    Route::get('register','UserController@registration');
+    Route::get('regions/districts/{id}','RegionController@getDistricts');
     Route::post('register','UserController@postRegister');
 });
 

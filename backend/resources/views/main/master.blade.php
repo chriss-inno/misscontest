@@ -94,8 +94,9 @@
 {!!HTML::script("admin/js/jquery.dcjqaccordion.2.7.js")!!}
 {!!HTML::script("admin/js/jquery.scrollTo.min.js")!!}
 {!!HTML::script("admin/js/jquery.nicescroll.js")!!}
+@yield('page-scripts-before1')
 {!!HTML::script("admin/js/respond.min.js" )!!}
-
+@yield('page-scripts-before')
 <!--common script for all pages-->
 {!!HTML::script("admin/js/common-scripts.js")!!}
  <!--script for this page-->
