@@ -224,34 +224,26 @@
                     <legend class="scheduler-border">Personal  details</legend>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <label for="first_name">First Name</label>
                                 <input type="text" class="form-control" name="first_name" value="{{$contestant->first_name}}">
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <label for="last_name">Last Name</label>
                                 <input type="text" class="form-control" name="last_name" value="{{$contestant->last_name}}">
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="middle_name">Other Name</label>
-                                <input type="text" class="form-control" name="middle_name" value="{{$contestant->middle_name}}">
                             </div>
                         </div>
 
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <label for="first_name">Email</label>
                                 <input type="email" class="form-control" name="email" value="{{$contestant->email}}">
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <label for="phone">Phone</label>
                                 <input type="text" class="form-control" name="phone" value="{{$contestant->phone}}">
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="nick_name">Nick Name</label>
-                                <input type="text" class="form-control" name="nick_name" value="{{$contestant->nick_name}}">
                             </div>
                         </div>
 
@@ -283,12 +275,16 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="zone">Zone</label>
-                        <input type="text" name="zone" class="form-control" value="{{$contestant->zone}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="zone">Date of Birth</label>
-                        <input class="form-control form-control input-medium default-date-picker" size="16" type="text" value="{{$contestant->dob}}" name="dob">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label for="zone">Date of Birth</label>
+                                <input class="form-control form-control input-medium default-date-picker" size="16" type="text" value="" name="dob">
+                            </div>
+                            <div class="col-lg-8">
+                                <label for="zone">Zone</label>
+                                <input type="text" name="zone" class="form-control">
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="profile_note">Contestant short note </label>

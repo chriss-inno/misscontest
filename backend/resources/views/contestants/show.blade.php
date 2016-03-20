@@ -188,13 +188,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <h4 class="pro-d-title">
-                                        <a href="#" class="">
+                                        <a href="#" class="text-capitalize">
                                            {{$contestant->first_name." ".$contestant->last_name}}
                                         </a>
                                     </h4>
-                                    <p>
-                                        {{$contestant->profile_note}}
-                                    </p>
                                     <div class="product_meta">
                                         <span class="posted_in"> <strong>Birthday:</strong> <a rel="tag" href="#">{{$contestant->dob}}</a></span>
                                         <span class="tagged_as"><strong>Phone Number:</strong> <a rel="tag" href="#">{{$contestant->phone}}</a></span>
@@ -202,7 +199,9 @@
                                         <span class="tagged_as"><strong>Region:</strong> <a rel="tag" href="#">{{$contestant->region->region_name}}</a></span>
                                         <span class="tagged_as"><strong>District:</strong> <a rel="tag" href="#">{{$contestant->district->district_name}}</a></span>
                                     </div>
-
+                                    <p>
+                                        <?php echo $contestant->profile_note;?>
+                                    </p>
                                 </div>
                             </div>
                         </section>

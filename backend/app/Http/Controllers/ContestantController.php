@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\File;
 
 class ContestantController extends Controller
 {
@@ -34,7 +37,7 @@ class ContestantController extends Controller
     public function getReviews()
     {
         $contestants=Contestant::all();
-        return view('contestants.blog',compact('contestants'));
+        return view('contestants.reviews',compact('contestants'));
     }
 
     /**
@@ -60,8 +63,6 @@ class ContestantController extends Controller
         $contestant=new Contestant;
         $contestant->first_name=$request->first_name;
         $contestant->last_name=$request->last_name;
-        $contestant->middle_name=$request->middle_name;
-        $contestant->nick_name=$request->nick_name;
         $contestant->email=$request->email;
         $contestant->phone=$request->phone;
         $contestant->region_id=$request->region;
@@ -117,8 +118,6 @@ class ContestantController extends Controller
         $contestant= Contestant::find($request->conte_id);
         $contestant->first_name=$request->first_name;
         $contestant->last_name=$request->last_name;
-        $contestant->middle_name=$request->middle_name;
-        $contestant->nick_name=$request->nick_name;
         $contestant->email=$request->email;
         $contestant->phone=$request->phone;
         $contestant->region_id=$request->region;

@@ -186,6 +186,7 @@
                 region: "required",
                 district: "required",
                 dob: "required",
+                profile_img: "required"
 
             },
             messages: {
@@ -194,12 +195,16 @@
                 phone: "Please enter phone number",
                 region: "Please select region",
                 district: "Please select district",
-                dob: "Please enter date of birth"
+                dob: "Please enter date of birth",
+                profile_img: "Please Upload Profile Image"
             }
         });
 
     </script>
 
+@stop
+@section('page-title')
+    Contestant Registration
 @stop
  @section('contents')
      <section class="wrapper site-min-height">
@@ -219,39 +224,31 @@
 
              </header>
              <div class="panel-body">
-                 {!! Form::open(array('url'=>'contestant/create','role'=>'form','id'=>'contestantForm')) !!}
+                 {!! Form::open(array('url'=>'contestant/create','role'=>'form','id'=>'contestantForm','files'=>true)) !!}
                  <fieldset class="scheduler-border">
                      <legend class="scheduler-border">Personal  details</legend>
                      <div class="form-group">
                          <div class="row">
-                             <div class="col-lg-4">
+                             <div class="col-lg-6">
                                  <label for="first_name">First Name</label>
                                  <input type="text" class="form-control" name="first_name" value="{{old('first_name')}}">
                              </div>
-                             <div class="col-lg-4">
+                             <div class="col-lg-6">
                                  <label for="last_name">Last Name</label>
                                  <input type="text" class="form-control" name="last_name" value="{{old('last_name')}}">
-                             </div>
-                             <div class="col-lg-4">
-                                 <label for="middle_name">Other Name</label>
-                                 <input type="text" class="form-control" name="middle_name" value="{{old('middle_name')}}">
                              </div>
                          </div>
 
                      </div>
                      <div class="form-group">
                          <div class="row">
-                             <div class="col-lg-4">
+                             <div class="col-lg-6">
                                  <label for="first_name">Email</label>
                                  <input type="email" class="form-control" name="email" value="{{old('email')}}">
                              </div>
-                             <div class="col-lg-4">
+                             <div class="col-lg-6">
                                  <label for="phone">Phone</label>
                                  <input type="text" class="form-control" name="phone" value="{{old('phone')}}">
-                             </div>
-                             <div class="col-lg-4">
-                                 <label for="nick_name">Nick Name</label>
-                                 <input type="text" class="form-control" name="nick_name" value="{{old('nick_name')}}">
                              </div>
                          </div>
 
@@ -281,12 +278,17 @@
 
                      </div>
                      <div class="form-group">
-                         <label for="zone">Zone</label>
-                         <input type="text" name="zone" class="form-control">
-                     </div>
-                     <div class="form-group">
-                         <label for="zone">Date of Birth</label>
-                         <input class="form-control form-control input-medium default-date-picker" size="16" type="text" value="" name="dob">
+                         <div class="row">
+                             <div class="col-lg-4">
+                                 <label for="zone">Date of Birth</label>
+                                 <input class="form-control form-control input-medium default-date-picker" size="16" type="text" value="" name="dob">
+                             </div>
+                             <div class="col-lg-8">
+                                 <label for="zone">Zone</label>
+                                 <input type="text" name="zone" class="form-control">
+                             </div>
+                         </div>
+
                      </div>
                      <div class="form-group">
                          <label for="profile_note">Contestant short note </label>
@@ -294,6 +296,12 @@
                      </div>
                      <div class="form-group">
                           <div class="row">
+                              <div class="col-lg-4">
+                                  <input type="file" name="profile_img" class="form-control" required>
+                              </div>
+                              <div class="col-lg-4">
+                                  <label for="profile_img">Profile Image</label>
+                              </div>
                               <div class="col-lg-2 pull-right">
                                   <input type="submit" value="Register" class="btn btn-block btn-info ">
                               </div>
