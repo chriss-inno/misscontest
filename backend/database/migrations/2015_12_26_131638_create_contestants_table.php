@@ -14,10 +14,9 @@ class CreateContestantsTable extends Migration
     {
         Schema::create('contestants', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('middle_name')->nullable();
-            $table->string('nick_name')->nullable();
+            $table->string('reference_no',20);
+            $table->string('contestant_name');
+            $table->string('gender')->nullable();
             $table->string('email')->unique();
             $table->string('phone');
             $table->integer('region_id');

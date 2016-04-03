@@ -95,19 +95,6 @@
         </li>
         <li class="sub-menu">
             <a href="javascript:;">
-                <i class="fa fa-envelope"></i>
-                <span>Member Forums</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('forums/create')}}">Create Forum</a></li>
-                <li><a  href="{{url('forums/view')}}">Manage Forum</a></li>
-                <li><a  href="{{url('forums/categories')}}">Forum Categories</a></li>
-                <li><a  href="{{url('forums/moderation')}}">Reported Issues</a></li>
-                <li><a  href="{{url('forums/subscription')}}">Manage Subscription</a></li>
-            </ul>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
                 <i class="fa fa-user-md"></i>
                 <span>User Management</span>
             </a>
@@ -180,8 +167,8 @@
 
         $("#contestantForm").validate({
             rules: {
-                first_name: "required",
-                last_name: "required",
+                contestant_name: "required",
+                gender: "required",
                 phone: "required",
                 region: "required",
                 district: "required",
@@ -190,13 +177,13 @@
 
             },
             messages: {
-                first_name: "Please enter first_name",
-                last_name: "Please enter module name",
+                contestant_name: "Please enter contestant name",
+                gender: "Please select gender",
                 phone: "Please enter phone number",
                 region: "Please select region",
                 district: "Please select district",
                 dob: "Please enter date of birth",
-                profile_img: "Please Upload Profile Image"
+                profile_img: "Please attach profile image"
             }
         });
 
@@ -212,7 +199,7 @@
          <section class="panel">
              <header class="panel-heading">
                  <div class="row">
-                     <div class="col-lg-8"><strong>Register Miss Tanzania Contestant Details</strong></div>
+                     <div class="col-lg-8"><strong>Register Contestant Details</strong></div>
                      <div class="col-lg-4 pull-right">
                          <div class="btn-group btn-group-justified">
                              <a class="btn btn-primary" href="{{url('contestant/create')}}">Register new</a>
@@ -226,16 +213,24 @@
              <div class="panel-body">
                  {!! Form::open(array('url'=>'contestant/create','role'=>'form','id'=>'contestantForm','files'=>true)) !!}
                  <fieldset class="scheduler-border">
+                     @if (count($errors) > 0)
+                         <div class="alert alert-danger">
+                             <ul>
+                                 @foreach ($errors->all() as $error)
+                                     <li>{{ $error }}</li>
+                                 @endforeach
+                             </ul>
+                         </div>
+                     @endif
                      <legend class="scheduler-border">Personal  details</legend>
                      <div class="form-group">
                          <div class="row">
-                             <div class="col-lg-6">
-                                 <label for="first_name">First Name</label>
-                                 <input type="text" class="form-control" name="first_name" value="{{old('first_name')}}">
-                             </div>
-                             <div class="col-lg-6">
-                                 <label for="last_name">Last Name</label>
-                                 <input type="text" class="form-control" name="last_name" value="{{old('last_name')}}">
+                             <div class="col-lg-12">
+                                 <label for="first_name">contestant Name</label>
+                                 <input type="text" class="form-control" name="contestant_name" value="{{old('contestant_name')}}" placeholder="Enter here contestant name">
+                                 @if($errors->first('contestant_name'))
+                                     <p class=" alert-danger">{{$errors->first('contestant_name')}}</p>
+                                 @endif
                              </div>
                          </div>
 
@@ -245,10 +240,16 @@
                              <div class="col-lg-6">
                                  <label for="first_name">Email</label>
                                  <input type="email" class="form-control" name="email" value="{{old('email')}}">
+                                 @if($errors->first('email'))
+                                     <p class=" alert-danger">{{$errors->first('email')}}</p>
+                                 @endif
                              </div>
                              <div class="col-lg-6">
                                  <label for="phone">Phone</label>
                                  <input type="text" class="form-control" name="phone" value="{{old('phone')}}">
+                                 @if($errors->first('phone'))
+                                     <p class=" alert-danger">{{$errors->first('phone')}}</p>
+                                 @endif
                              </div>
                          </div>
 
@@ -258,21 +259,35 @@
                              <div class="col-lg-4">
                                  <label for="first_name">Region</label>
                                  <select class="form-control" name="region" id="region">
+                                     @if(old('region') != "")
+                                         <option value="{{old('region')}}" selected><?php  $regft=\App\Region::find(old('region')); echo $regft->region_name; ?></option>
+                                         @else
                                      <option value="">----select----</option>
+                                     @endif
                                      @foreach(\App\Region::orderBy('region_name','ASC')->get() as $region)
                                          <option value="{{$region->id}}">{{$region->region_name}}</option>
                                          @endforeach
                                  </select>
+                                 @if($errors->first('region'))
+                                     <p class=" alert-danger">{{$errors->first('region')}}</p>
+                                 @endif
                              </div>
                              <div class="col-lg-4">
                                  <label for="district">District</label>
                                  <select class="form-control" name="district" id="district">
+                                     @if(old('district') != "")
+                                         <option value="{{old('district')}}" selected><?php  $districtft=\App\District::find(old('district')); echo $districtft->district_name; ?></option>
+                                     @else
                                      <option value="">----select--</option>
+                                         @endif
                                  </select>
+                                 @if($errors->first('district'))
+                                     <p class=" alert-danger">{{$errors->first('district')}}</p>
+                                 @endif
                              </div>
                              <div class="col-lg-4">
                                  <label for="city">City</label>
-                                 <input type="text" name="city" class="form-control">
+                                 <input type="text" name="city" class="form-control" value="{{old('city')}}">
                              </div>
                          </div>
 
@@ -281,9 +296,27 @@
                          <div class="row">
                              <div class="col-lg-4">
                                  <label for="zone">Date of Birth</label>
-                                 <input class="form-control form-control input-medium default-date-picker" size="16" type="text" value="" name="dob">
+                                 <input class="form-control form-control input-medium default-date-picker" size="16" type="text"  value="{{old('dob')}}" name="dob">
+                                 @if($errors->first('dob'))
+                                     <p class=" alert-danger">{{$errors->first('dob')}}</p>
+                                 @endif
                              </div>
-                             <div class="col-lg-8">
+                             <div class="col-lg-4">
+                                 <label for="gender">Gender</label>
+                                <select name="gender" id="gender" required class="form-control">
+                                    @if(old('gender') != "")
+                                        <option value="{{old('gender')}}" selected>{{old('gender')}}</option>
+                                    @else
+                                        <option value="">--Select Gender--</option>
+                                    @endif
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                                 @if($errors->first('gender'))
+                                     <p class=" alert-danger">{{$errors->first('gender')}}</p>
+                                 @endif
+                             </div>
+                             <div class="col-lg-4">
                                  <label for="zone">Zone</label>
                                  <input type="text" name="zone" class="form-control">
                              </div>
@@ -297,10 +330,11 @@
                      <div class="form-group">
                           <div class="row">
                               <div class="col-lg-4">
-                                  <input type="file" name="profile_img" class="form-control" required>
-                              </div>
-                              <div class="col-lg-4">
                                   <label for="profile_img">Profile Image</label>
+                                  <input type="file" name="profile_img" class="form-control" required id="profile_img">
+                                  @if($errors->first('profile_img'))
+                                      <p class=" alert-danger">{{$errors->first('profile_img')}}</p>
+                                  @endif
                               </div>
                               <div class="col-lg-2 pull-right">
                                   <input type="submit" value="Register" class="btn btn-block btn-info ">

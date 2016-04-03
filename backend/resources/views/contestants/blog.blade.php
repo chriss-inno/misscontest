@@ -2,6 +2,9 @@
 @section('page-style')
     {!!HTML::style("admin/assets/jquery-ui/jquery-ui-1.10.1.custom.min.css")!!}
 @stop
+@section('page-title')
+    Manage Contestant Reviews
+@stop
 @section('page-menus')
     <ul class="sidebar-menu" id="nav-accordion">
         <li >
@@ -54,8 +57,8 @@
             </a>
             <ul class="sub">
                 <li ><a  href="{{url('contestant/create')}}">Registration</a></li>
-                <li class="active"><a  href="{{url('contestant/manage')}}">Manage contestants</a></li>
-                <li><a  href="{{url('contestant/reviews')}}">Contestants Reviews</a></li>
+                <li ><a  href="{{url('contestant/manage')}}">Manage contestants</a></li>
+                <li class="active"><a  href="{{url('contestant/reviews')}}">Contestants Reviews</a></li>
                 <li><a  href="{{url('contestant/blog')}}">Profile Blog</a></li>
             </ul>
         </li>
@@ -85,19 +88,7 @@
                 <li><a  href="{{url('events/calendar')}}">Event Calendar</a></li>
             </ul>
         </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-envelope"></i>
-                <span>Member Forums</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('forums/create')}}">Create Forum</a></li>
-                <li><a  href="{{url('forums/view')}}">Manage Forum</a></li>
-                <li><a  href="{{url('forums/categories')}}">Forum Categories</a></li>
-                <li><a  href="{{url('forums/moderation')}}">Reported Issues</a></li>
-                <li><a  href="{{url('forums/subscription')}}">Manage Subscription</a></li>
-            </ul>
-        </li>
+
         <li class="sub-menu">
             <a href="javascript:;">
                 <i class="fa fa-user-md"></i>
@@ -163,7 +154,7 @@
         <section class="panel">
             <header class="panel-heading">
                 <div class="row">
-                    <div class="col-lg-8"><strong> Miss Tanzania Contestant Details-:Blog view</strong></div>
+                    <div class="col-lg-8"><strong> Contestant Details </strong></div>
                     <div class="col-lg-4 pull-right">
                         <div class="btn-group btn-group-justified">
                             <a class="btn btn-primary" href="{{url('contestant/create')}}">Register new</a>
@@ -179,238 +170,23 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row product-list">
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/product-list/pro-1.jpg') }}" alt=""/>
-                                    </div>
+                            @foreach($contestants as $contr)
+                                <div class="col-md-4">
+                                    <section class="panel">
+                                        <div class="pro-img-box">
+                                            <img src="{{ asset('admin/img/product-list/pro-1.jpg') }}" alt=""/>
+                                        </div>
 
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-                                                Contestant Name
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/product-list/pro1.jpg') }}" alt=""/>
-                                    </div>
-
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-                                                Contestant Name
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/product-list/pro2.jpg') }}" alt=""/>
-                                    </div>
-
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-                                                Contestant Name
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/product-list/pro3.jpg') }}" alt=""/>
-                                    </div>
-
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-                                                Contestant Name
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/product-list/pro-1.jpg') }}" alt=""/>
-                                    </div>
-
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-                                                Contestant Name
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/product-list/pro2.jpg') }}" alt=""/>
-                                        
-                                    </div>
-
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-                                                Contestant Name
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/product-list/pro1.jpg') }}" alt=""/>
-                                    </div>
-
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-                                                Contestant Name
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/product-list/pro3.jpg') }}" alt=""/>
-                                    </div>
-
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-                                                Contestant Name
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/product-list/pro-1.jpg') }}" alt=""/>
-                                    </div>
-
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-                                                Contestant Name
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/product-list/pro1.jpg') }}" alt=""/>
-                                    </div>
-
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-                                                Contestant Name
-                                            </a>
-                                        </h4>
-
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/product-list/pro3.jpg') }}" alt=""/>
-
-                                    </div>
-
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-                                                Contestant Name
-                                            </a>
-                                        </h4>
-
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/product-list/pro-1.jpg') }}" alt=""/>
-
-                                    </div>
-
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-                                                Contestant Name
-                                            </a>
-                                        </h4>
-
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/product-list/pro3.jpg') }}" alt=""/>
-                                    </div>
-
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-                                                Contestant Name
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/product-list/pro-1.jpg') }}" alt=""/>
-
-                                    </div>
-
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-                                                Contestant Name
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/product-list/pro2.jpg') }}" alt=""/>
-                                    </div>
-
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-                                                Contestant Name
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </section>
-                            </div>
+                                        <div class="panel-body text-center">
+                                            <h4>
+                                                <a href="{{url('contestant/show/')}}/{{$contr->id}}" class="pro-title">
+                                                    {{$contr->contestant_name}} [{{$contr->region->region_name}}]
+                                                </a>
+                                            </h4>
+                                        </div>
+                                    </section>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

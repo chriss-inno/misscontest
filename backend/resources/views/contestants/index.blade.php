@@ -292,7 +292,7 @@
         <section class="panel">
             <header class="panel-heading">
                 <div class="row">
-                    <div class="col-lg-8"><strong>Manage Miss Tanzania Contestant Details</strong></div>
+                    <div class="col-lg-8"><strong>Manage Contestant Details</strong></div>
                     <div class="col-lg-4 pull-right">
                         <div class="btn-group btn-group-justified">
                             <a class="btn btn-primary" href="{{url('contestant/create')}}">Register new</a>
@@ -309,8 +309,8 @@
                         <thead>
                         <tr>
                             <th>SNO</th>
-                            <th>First name</th>
-                            <th>Last Name</th>
+                            <th>Contestant name</th>
+                            <th>Gender</th>
                             <th>Birth date</th>
                             <th>District</th>
                             <th>Region</th>
@@ -322,8 +322,8 @@
                         @foreach($contestants as $contestant)
                         <tr >
                             <td>{{$cont++}}</td>
-                            <td>{{$contestant->first_name}}</td>
-                            <td>{{$contestant->last_name}}</td>
+                            <td>{{$contestant->contestant_name}}</td>
+                            <td>{{$contestant->gender}}</td>
                             <td>{{$contestant->dob}}</td>
                             <td>{{$contestant->district->district_name}}</td>
                             <td>{{$contestant->region->region_name}}</td>

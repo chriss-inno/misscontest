@@ -2,6 +2,9 @@
 @section('page-style')
     {!!HTML::style("admin/assets/jquery-ui/jquery-ui-1.10.1.custom.min.css")!!}
 @stop
+@section('page-title')
+    Contestant Details-:Profile Blog
+@stop
 @section('page-menus')
     <ul class="sidebar-menu" id="nav-accordion">
         <li >
@@ -163,7 +166,7 @@
         <section class="panel">
             <header class="panel-heading">
                 <div class="row">
-                    <div class="col-lg-8"><strong> Miss Tanzania Contestant Details-:Profile</strong></div>
+                    <div class="col-lg-8"><strong>Contestant Details-:Profile</strong></div>
                     <div class="col-lg-4 pull-right">
                         <div class="btn-group btn-group-justified">
                             <a class="btn btn-primary" href="{{url('contestant/create')}}">Register new</a>
@@ -183,13 +186,13 @@
                             <div class="panel-body">
                                 <div class="col-md-6">
                                     <div class="pro-img-details">
-                                        <img src="{{ asset('admin/img/product-list/pro-thumb-big.jpg') }}" alt=""/>
+                                        <img src="{{asset(storage_path().'/images/'.$contest->profile_image) }}" alt="{{$contestant->contestant_name}}" width="370px" height="370px"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <h4 class="pro-d-title">
                                         <a href="#" class="text-capitalize">
-                                           {{$contestant->first_name." ".$contestant->last_name}}
+                                           {{$contestant->contestant_name}}
                                         </a>
                                     </h4>
                                     <div class="product_meta">

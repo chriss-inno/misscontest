@@ -95,19 +95,6 @@
         </li>
         <li class="sub-menu">
             <a href="javascript:;">
-                <i class="fa fa-envelope"></i>
-                <span>Member Forums</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('forums/create')}}">Create Forum</a></li>
-                <li><a  href="{{url('forums/view')}}">Manage Forum</a></li>
-                <li><a  href="{{url('forums/categories')}}">Forum Categories</a></li>
-                <li><a  href="{{url('forums/moderation')}}">Reported Issues</a></li>
-                <li><a  href="{{url('forums/subscription')}}">Manage Subscription</a></li>
-            </ul>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
                 <i class="fa fa-user-md"></i>
                 <span>User Management</span>
             </a>
@@ -180,8 +167,7 @@
 
         $("#contestantForm").validate({
             rules: {
-                first_name: "required",
-                last_name: "required",
+                contestant_name: "required",
                 phone: "required",
                 region: "required",
                 district: "required",
@@ -189,8 +175,7 @@
 
             },
             messages: {
-                first_name: "Please enter first_name",
-                last_name: "Please enter module name",
+                contestant_name: "Please enter contestant name",
                 phone: "Please enter phone number",
                 region: "Please select region",
                 district: "Please select district",
@@ -224,13 +209,9 @@
                     <legend class="scheduler-border">Personal  details</legend>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <label for="first_name">First Name</label>
-                                <input type="text" class="form-control" name="first_name" value="{{$contestant->first_name}}">
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="last_name">Last Name</label>
-                                <input type="text" class="form-control" name="last_name" value="{{$contestant->last_name}}">
+                            <div class="col-lg-12">
+                                <label for="first_name">contestant Name</label>
+                                <input type="text" class="form-control" name="contestant_name" value="{{$contestant->contestant_name}}" placeholder="Enter here contestant name">
                             </div>
                         </div>
 
@@ -278,7 +259,18 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <label for="zone">Date of Birth</label>
-                                <input class="form-control form-control input-medium default-date-picker" size="16" type="text" value="" name="dob">
+                                <input class="form-control form-control input-medium default-date-picker" size="16" type="text" value="{{$contestant->city}}" name="dob">
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="gender">Gender</label>
+                                <select name="gender" id="gender" required class="form-control">
+                                    <option value="">--Select Gender--</option>
+                                    @if($contestant->gender != null && $contestant->gender !="")
+                                        <option value="{{$contestant->gender}}">{{$contestant->gender}}</option>
+                                        @endif
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
                             </div>
                             <div class="col-lg-8">
                                 <label for="zone">Zone</label>

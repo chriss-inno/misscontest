@@ -2,6 +2,9 @@
 @section('page-style')
     {!!HTML::style("admin/assets/jquery-ui/jquery-ui-1.10.1.custom.min.css")!!}
 @stop
+@section('page-title')
+    Manage Contestant Reviews
+@stop
 @section('page-menus')
     <ul class="sidebar-menu" id="nav-accordion">
         <li >
@@ -85,19 +88,7 @@
                 <li><a  href="{{url('events/calendar')}}">Event Calendar</a></li>
             </ul>
         </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-envelope"></i>
-                <span>Member Forums</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('forums/create')}}">Create Forum</a></li>
-                <li><a  href="{{url('forums/view')}}">Manage Forum</a></li>
-                <li><a  href="{{url('forums/categories')}}">Forum Categories</a></li>
-                <li><a  href="{{url('forums/moderation')}}">Reported Issues</a></li>
-                <li><a  href="{{url('forums/subscription')}}">Manage Subscription</a></li>
-            </ul>
-        </li>
+
         <li class="sub-menu">
             <a href="javascript:;">
                 <i class="fa fa-user-md"></i>
@@ -163,7 +154,7 @@
         <section class="panel">
             <header class="panel-heading">
                 <div class="row">
-                    <div class="col-lg-8"><strong> Miss Tanzania Contestant Details-:Reviews</strong></div>
+                    <div class="col-lg-8"><strong> Contestant Details-:Reviews</strong></div>
                     <div class="col-lg-4 pull-right">
                         <div class="btn-group btn-group-justified">
                             <a class="btn btn-primary" href="{{url('contestant/create')}}">Register new</a>
@@ -183,13 +174,13 @@
                                  <div class="col-md-4">
                                     <section class="panel">
                                         <div class="pro-img-box">
-                                            <img src="{{ asset('admin/img/product-list/pro-1.jpg') }}" alt=""/>
+                                            <img src="{{ storage_path() .'/images/'.$contr->profile_image }}" alt="{{$contr->contestant_name}}"/>
                                         </div>
 
                                         <div class="panel-body text-center">
                                             <h4>
                                                 <a href="{{url('contestant/show/')}}/{{$contr->id}}" class="pro-title">
-                                                    {{$contr->first_name." ". $contr->last_name}} [{{$contr->region->region_name}}]
+                                                    {{$contr->contestant_name}} [{{$contr->region->region_name}}]
                                                 </a>
                                             </h4>
                                         </div>

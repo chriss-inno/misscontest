@@ -60,9 +60,19 @@ class ContestantController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'profile_img' => 'required|mimes:jpeg,bmp,png',
+            'contestant_name' => 'required',
+            'gender' => 'required',
+            'phone' => 'required',
+            'email' => 'email',
+            'dob' => 'required|before:18 years ago', // rules
+            'before' => 'You must be at least 13 years old' // messages
+        ]);
+
         $contestant=new Contestant;
-        $contestant->first_name=$request->first_name;
-        $contestant->last_name=$request->last_name;
+        $contestant->contestant_name=$request->contestant_name;
+        $contestant->gender=$request->gender;
         $contestant->email=$request->email;
         $contestant->phone=$request->phone;
         $contestant->region_id=$request->region;
@@ -74,6 +84,21 @@ class ContestantController extends Controller
         $contestant->status="Active";
         $contestant->dob=$request->dob;
         $contestant->contest_year=date("Y");
+        $contestant->save();
+
+        //Generate reference number
+        $reference_no= $contestant->id.date("Ymi");
+        $contestant->reference_no=$reference_no;
+        $contestant->save();
+        //check if attachment
+
+        $file= $request->file('profile_img');
+        $destinationPath = storage_path() .'/images/';
+        $filename  =  $contestant->reference_no. '.'.$file->getClientOriginalExtension();
+
+        $file->move($destinationPath, $filename);
+
+        $contestant->profile_image= $filename;
         $contestant->save();
 
        return redirect('contestant/manage');
@@ -114,10 +139,22 @@ class ContestantController extends Controller
      */
     public function update(Request $request)
     {
-        //
+
+
+            $this->validate($request, [
+                'profile_img' => 'required|mimes:jpeg,bmp,png',
+                'contestant_name' => 'required',
+                'gender' => 'required',
+                'phone' => 'required',
+                'email' => 'email',
+                ['dob' => ['required', 'before:18 years ago']], // rules
+                ['before' => 'You must be at least 13 years old'] // messages
+            ]);
+
         $contestant= Contestant::find($request->conte_id);
-        $contestant->first_name=$request->first_name;
-        $contestant->last_name=$request->last_name;
+        $contestant=new Contestant;
+        $contestant->contestant_name=$request->contestant_name;
+        $contestant->gender=$request->gender;
         $contestant->email=$request->email;
         $contestant->phone=$request->phone;
         $contestant->region_id=$request->region;
@@ -129,6 +166,21 @@ class ContestantController extends Controller
         $contestant->status="Active";
         $contestant->dob=$request->dob;
         $contestant->contest_year=date("Y");
+        $contestant->save();
+
+        //Generate reference number
+        $reference_no= $contestant->id.date("Ymi");
+        $contestant->reference_no=$reference_no;
+        $contestant->save();
+        //check if attachment
+
+        $file= $request->file('profile_img');
+        $destinationPath = storage_path() .'/images/';
+        $filename  =  $contestant->reference_no. '.'.$file->getClientOriginalExtension();
+
+        $file->move($destinationPath, $filename);
+
+        $contestant->profile_image= $filename;
         $contestant->save();
 
         return redirect('contestant/manage');
