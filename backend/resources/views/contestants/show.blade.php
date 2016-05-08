@@ -14,6 +14,9 @@
     {!!HTML::style("admin/assets/file-uploader/css/jquery.fileupload-ui-noscript.css")!!}
 </noscript>
 @stop
+@section('page-title')
+    Contestant Details-:Profile Blog
+@stop
 @section('page-menus')
     <ul class="sidebar-menu" id="nav-accordion">
         <li >
@@ -224,7 +227,7 @@
         <section class="panel">
             <header class="panel-heading">
                 <div class="row">
-                    <div class="col-lg-8"><strong> Miss Tanzania Contestant Details-:Profile</strong></div>
+                    <div class="col-lg-8"><strong>Contestant Details-:Profile</strong></div>
                     <div class="col-lg-4 pull-right">
                         <div class="btn-group btn-group-justified">
                             <a class="btn btn-primary" href="{{url('contestant/create')}}">Register new</a>
@@ -245,13 +248,21 @@
                             <div class="panel-body">
                                 <div class="col-md-6">
                                     <div class="pro-img-details">
+<<<<<<< HEAD
                                         <img src="{{ asset('admin/img/contestant_galley/'.$contestant->profile_image) }}" alt="">
+=======
+                                        <img src="{{asset(storage_path().'/images/'.$contest->profile_image) }}" alt="{{$contestant->contestant_name}}" width="370px" height="370px"/>
+>>>>>>> e213ec86866ec1fb505e1c2cfaba6a0c5ccb7467
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <h4 class="pro-d-title">
                                         <a href="#" class="text-capitalize">
+<<<<<<< HEAD
                                            {{$contestant->full_name}}
+=======
+                                           {{$contestant->contestant_name}}
+>>>>>>> e213ec86866ec1fb505e1c2cfaba6a0c5ccb7467
                                         </a>
                                     </h4>
                                     <div class="product_meta">

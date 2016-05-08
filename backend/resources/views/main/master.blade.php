@@ -7,7 +7,7 @@
     <meta name="author" content="Innocent Christopher KIlogha">
     <meta name="keyword" content="Miss, Tanzania, Utalii, Urembo, Miss Tanzania, KIlimanjaro, Mbuga za wanayama, Vivutio">
     <link rel="shortcut icon" href="{{ asset('admin/img/logo.png') }}">
-    <title>Miss Tanzania Contest | @yield('page-title')</title>
+    <title>Contest | @yield('page-title')</title>
     <!-- Bootstrap core CSS -->
      {!!HTML::style("admin/css/bootstrap.min.css" )!!}
      {!!HTML::style("admin/css/bootstrap-reset.css" )!!}
@@ -34,7 +34,11 @@
             <div data-original-title="Toggle Navigation" data-placement="right" class="fa fa-bars tooltips"></div>
         </div>
         <!--logo start-->
+<<<<<<< HEAD
         <a href="#" class="logo" >Miss Tanzania Contest</a>
+=======
+        <a href="index.html" class="logo" >Contest</a>
+>>>>>>> e213ec86866ec1fb505e1c2cfaba6a0c5ccb7467
         <!--logo end-->
         <div class="top-nav ">
             <ul class="nav pull-right top-menu">

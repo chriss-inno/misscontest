@@ -88,19 +88,6 @@
         </li>
         <li class="sub-menu">
             <a href="javascript:;">
-                <i class="fa fa-envelope"></i>
-                <span>Member Forums</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('forums/create')}}">Create Forum</a></li>
-                <li><a  href="{{url('forums/view')}}">Manage Forum</a></li>
-                <li><a  href="{{url('forums/categories')}}">Forum Categories</a></li>
-                <li><a  href="{{url('forums/moderation')}}">Reported Issues</a></li>
-                <li><a  href="{{url('forums/subscription')}}">Manage Subscription</a></li>
-            </ul>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
                 <i class="fa fa-user-md"></i>
                 <span>User Management</span>
             </a>
@@ -283,8 +270,13 @@
                                    <?php $contest=\App\Contestant::orderBy('hints','Desc')->first();?>
                                    <h1><strong>popular</strong> <br> Contestant of this week</h1>
                                    <div class="desk yellow">
+<<<<<<< HEAD
                                        @if(count($contest)> 0 && $contest !=null)
                                        <h3>{{$contest->full_name}}</h3>
+=======
+                                       @if(count($contest)>0)
+                                       <h3>{{$contest->contestant_name}}</h3>
+>>>>>>> e213ec86866ec1fb505e1c2cfaba6a0c5ccb7467
                                        <p>{{$contest->profile_note}}</p>
                                            @endif
                                    </div>
@@ -294,9 +286,13 @@
                        <aside class="post-highlight yellow v-align">
                            <div class="panel-body text-center">
                                <div class="pro-thumb">
+<<<<<<< HEAD
                                    @if(count($contest)> 0 && $contest !=null)
+=======
+                                   @if(count($contest)>0)
+>>>>>>> e213ec86866ec1fb505e1c2cfaba6a0c5ccb7467
                                    @if($contest->profile_image !="")
-                                       <img src="{{ asset('admin/img/contestant_galley/'.$contest->profile_image) }}" alt="">
+                                       <img src="{{ asset(storage_path().'/images/'.$contest->profile_image) }}" alt="">
                                        @else
                                          <img src="{{ asset('admin/img/ring.jpg') }}" alt="">
                                        @endif

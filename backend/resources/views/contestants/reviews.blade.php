@@ -2,6 +2,9 @@
 @section('page-style')
     {!!HTML::style("admin/assets/jquery-ui/jquery-ui-1.10.1.custom.min.css")!!}
 @stop
+@section('page-title')
+    Manage Contestant Reviews
+@stop
 @section('page-menus')
     <ul class="sidebar-menu" id="nav-accordion">
         <li >
@@ -85,19 +88,7 @@
                 <li><a  href="{{url('events/calendar')}}">Event Calendar</a></li>
             </ul>
         </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-envelope"></i>
-                <span>Member Forums</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('forums/create')}}">Create Forum</a></li>
-                <li><a  href="{{url('forums/view')}}">Manage Forum</a></li>
-                <li><a  href="{{url('forums/categories')}}">Forum Categories</a></li>
-                <li><a  href="{{url('forums/moderation')}}">Reported Issues</a></li>
-                <li><a  href="{{url('forums/subscription')}}">Manage Subscription</a></li>
-            </ul>
-        </li>
+
         <li class="sub-menu">
             <a href="javascript:;">
                 <i class="fa fa-user-md"></i>
@@ -183,15 +174,23 @@
                                  <div class="col-md-4">
                                     <section class="panel">
                                         <div class="pro-img-box">
+<<<<<<< HEAD
                                             <a href="{{url('contestant/show/')}}/{{$contr->id}}">
                                             <img src="{{ asset('admin/img/product-list/pro-1.jpg') }}" alt=""/>
                                             </a>
+=======
+                                            <img src="{{ storage_path() .'/images/'.$contr->profile_image }}" alt="{{$contr->contestant_name}}"/>
+>>>>>>> e213ec86866ec1fb505e1c2cfaba6a0c5ccb7467
                                         </div>
 
                                         <div class="panel-body text-center">
                                             <h4>
                                                 <a href="{{url('contestant/show/')}}/{{$contr->id}}" class="pro-title">
+<<<<<<< HEAD
                                                     {{$contr->full_name}} [{{$contr->region->region_name}}]
+=======
+                                                    {{$contr->contestant_name}} [{{$contr->region->region_name}}]
+>>>>>>> e213ec86866ec1fb505e1c2cfaba6a0c5ccb7467
                                                 </a>
                                             </h4>
                                         </div>
