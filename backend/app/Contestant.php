@@ -15,4 +15,12 @@ class Contestant extends Model
     {
         return $this->belongsTo('\App\Region','region_id');
     }
+    public function reviews()
+    {
+        return $this->hasMany('\App\VisitorsReviews','contestant_id','id');
+    }
+    public function photos()
+    {
+        return $this->hasMany('\App\ContestantGallery','contestant_id','id');
+    }
 }

@@ -2,151 +2,163 @@
 @section('page-style')
     {!!HTML::style("admin/assets/bootstrap-fileupload/bootstrap-fileupload.css" )!!}
     {!!HTML::style("admin/assets/bootstrap-wysihtml5/bootstrap-wysihtml5.css" )!!}
-    {!!HTML::style("admin/assets/bootstrap-wysihtml5/wysiwyg-color.css" )!!}
     {!!HTML::style("admin/assets/bootstrap-datepicker/css/datepicker.css"  )!!}
     {!!HTML::style("admin/assets/bootstrap-timepicker/compiled/timepicker.css"  )!!}
     {!!HTML::style("admin/assets/bootstrap-colorpicker/css/colorpicker.css"  )!!}
     {!!HTML::style("admin/assets/bootstrap-daterangepicker/daterangepicker-bs3.css"  )!!}
     {!!HTML::style("admin/assets/bootstrap-datetimepicker/css/datetimepicker.css"  )!!}
 
+            <!-- blueimp Gallery styles -->
+{!!HTML::style("http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css")!!}
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+ {!!HTML::style("admin/assets/file-uploader/css/jquery.fileupload.css")!!}
+ {!!HTML::style("admin/assets/file-uploader/css/jquery.fileupload-ui.css")!!}
+<!-- CSS adjustments for browsers with JavaScript disabled -->
+<noscript>
+     {!!HTML::style("admin/assets/file-uploader/css/jquery.fileupload-noscript.css")!!}
+</noscript>
+<noscript>
+    {!!HTML::style("admin/assets/file-uploader/css/jquery.fileupload-ui-noscript.css")!!}
+</noscript>
+
 @stop
 @section('page-menus')
-    <ul class="sidebar-menu" id="nav-accordion">
-        <li >
-            <a href="{{url('home')}}">
-                <i class="fa fa-dashboard"></i>
-                <span>Dashboard</span>
-            </a>
-        </li>
+<ul class="sidebar-menu" id="nav-accordion">
+    <li >
+        <a href="{{url('home')}}">
+            <i class="fa fa-dashboard"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
 
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-laptop"></i>
-                <span>Contents</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('contents/articles/create')}}">Create Articles</a></li>
-                <li><a  href="{{url('contents/articles')}}">Manage Articles</a></li>
-                <li><a  href="{{url('contents/categories')}}">Articles Categories</a></li>
-                <li><a  href="{{url('contents/modules')}}">Manage Modules</a></li>
-                <li><a  href="{{url('contents/media')}}">Manage Media</a></li>
-                <li><a  href="{{url('contents/documents')}}">Manage Documents</a></li>
-                <li><a  href="{{url('contents/galleries')}}">Galleries</a></li>
-            </ul>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-tasks"></i>
-                <span>Site Menu</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('menus/create')}}">Create Menu</a></li>
-                <li><a  href="{{url('menus/groups')}}">Menu Groups</a></li>
-            </ul>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-chain"></i>
-                <span>Polls</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('polls/create')}}">Create Poll</a></li>
-                <li><a  href="{{url('polls/groups')}}">Manage Polls</a></li>
-            </ul>
-        </li>
+    <li class="sub-menu">
+        <a href="javascript:;">
+            <i class="fa fa-laptop"></i>
+            <span>Contents</span>
+        </a>
+        <ul class="sub">
+            <li><a  href="{{url('contents/articles/create')}}">Create Articles</a></li>
+            <li><a  href="{{url('contents/articles')}}">Manage Articles</a></li>
+            <li><a  href="{{url('contents/categories')}}">Articles Categories</a></li>
+            <li><a  href="{{url('contents/modules')}}">Manage Modules</a></li>
+            <li><a  href="{{url('contents/media')}}">Manage Media</a></li>
+            <li><a  href="{{url('contents/documents')}}">Manage Documents</a></li>
+            <li><a  href="{{url('contents/galleries')}}">Galleries</a></li>
+        </ul>
+    </li>
+    <li class="sub-menu">
+        <a href="javascript:;">
+            <i class="fa fa-tasks"></i>
+            <span>Site Menu</span>
+        </a>
+        <ul class="sub">
+            <li><a  href="{{url('menus/create')}}">Create Menu</a></li>
+            <li><a  href="{{url('menus/groups')}}">Menu Groups</a></li>
+        </ul>
+    </li>
+    <li class="sub-menu">
+        <a href="javascript:;">
+            <i class="fa fa-chain"></i>
+            <span>Polls</span>
+        </a>
+        <ul class="sub">
+            <li><a  href="{{url('polls/create')}}">Create Poll</a></li>
+            <li><a  href="{{url('polls/groups')}}">Manage Polls</a></li>
+        </ul>
+    </li>
 
-        <li class="sub-menu">
-            <a href="javascript:;"  class="active">
-                <i class="fa fa-users"></i>
-                <span>Contestants</span>
-            </a>
-            <ul class="sub">
-                <li  class="active"><a  href="{{url('contestant/create')}}">Registration</a></li>
-                <li><a  href="{{url('contestant/manage')}}">Manage contestants</a></li>
-                <li><a  href="{{url('contestant/reviews')}}">Contestants Reviews</a></li>
-                <li><a  href="{{url('contestant/blog')}}">Profile Blog</a></li>
-            </ul>
-        </li>
+    <li class="sub-menu">
+        <a href="javascript:;"  class="active">
+            <i class="fa fa-users"></i>
+            <span>Contestants</span>
+        </a>
+        <ul class="sub">
+            <li  class="active"><a  href="{{url('contestant/create')}}">Registration</a></li>
+            <li><a  href="{{url('contestant/manage')}}">Manage contestants</a></li>
+            <li><a  href="{{url('contestant/reviews')}}">Contestants Reviews</a></li>
+            <li><a  href="{{url('contestant/blog')}}">Profile Blog</a></li>
+        </ul>
+    </li>
 
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-users"></i>
-                <span>Membership</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('membership/registration')}}">Members registration</a></li>
-                <li><a  href="{{url('membership/subscriptions')}}">Subscriptions</a></li>
-                <li><a  href="{{url('membership/payments')}}">Payments</a></li>
-                <li><a  href="{{url('membership/reports')}}">Reports</a></li>
-            </ul>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;" >
-                <i class="fa fa-calendar"></i>
-                <span>Events</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('events/create')}}">Create Event</a></li>
-                <li><a  href="{{url('events/view')}}">Events Blog</a></li>
-                <li><a  href="{{url('events/manage')}}">Manage Events</a></li>
-                <li><a  href="{{url('events/settings')}}">Event Setting</a></li>
-                <li><a  href="{{url('events/calendar')}}">Event Calendar</a></li>
-            </ul>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-envelope"></i>
-                <span>Member Forums</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('forums/create')}}">Create Forum</a></li>
-                <li><a  href="{{url('forums/view')}}">Manage Forum</a></li>
-                <li><a  href="{{url('forums/categories')}}">Forum Categories</a></li>
-                <li><a  href="{{url('forums/moderation')}}">Reported Issues</a></li>
-                <li><a  href="{{url('forums/subscription')}}">Manage Subscription</a></li>
-            </ul>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-user-md"></i>
-                <span>User Management</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('users/view')}}">Registered Users</a></li>
-                <li><a  href="{{url('users/groups')}}">User Groups</a></li>
-                <li><a  href="{{url('users/manage')}}">Manage Users</a></li>
-                <li><a  href="{{url('users/reports')}}">Reports</a></li>
-            </ul>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-cogs"></i>
-                <span>Settings</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('settings/site')}}">Site setting</a></li>
-                <li><a  href="{{url('settings/mail')}}">Mail setting</a></li>
-                <li><a  href="{{url('settings/jobs')}}">Background Jobs</a></li>
-                <li><a  href="{{url('settings/reports')}}">Reports</a></li>
-            </ul>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-user"></i>
-                <span>My Profile</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('settings/site')}}">Site setting</a></li>
-                <li><a  href="{{url('settings/mail')}}">Mail setting</a></li>
-                <li><a  href="{{url('settings/jobs')}}">Background Jobs</a></li>
-                <li><a  href="{{url('settings/reports')}}">Reports</a></li>
-            </ul>
-        </li>
+    <li class="sub-menu">
+        <a href="javascript:;">
+            <i class="fa fa-users"></i>
+            <span>Membership</span>
+        </a>
+        <ul class="sub">
+            <li><a  href="{{url('membership/registration')}}">Members registration</a></li>
+            <li><a  href="{{url('membership/subscriptions')}}">Subscriptions</a></li>
+            <li><a  href="{{url('membership/payments')}}">Payments</a></li>
+            <li><a  href="{{url('membership/reports')}}">Reports</a></li>
+        </ul>
+    </li>
+    <li class="sub-menu">
+        <a href="javascript:;" >
+            <i class="fa fa-calendar"></i>
+            <span>Events</span>
+        </a>
+        <ul class="sub">
+            <li><a  href="{{url('events/create')}}">Create Event</a></li>
+            <li><a  href="{{url('events/view')}}">Events Blog</a></li>
+            <li><a  href="{{url('events/manage')}}">Manage Events</a></li>
+            <li><a  href="{{url('events/settings')}}">Event Setting</a></li>
+            <li><a  href="{{url('events/calendar')}}">Event Calendar</a></li>
+        </ul>
+    </li>
+    <li class="sub-menu">
+        <a href="javascript:;">
+            <i class="fa fa-envelope"></i>
+            <span>Member Forums</span>
+        </a>
+        <ul class="sub">
+            <li><a  href="{{url('forums/create')}}">Create Forum</a></li>
+            <li><a  href="{{url('forums/view')}}">Manage Forum</a></li>
+            <li><a  href="{{url('forums/categories')}}">Forum Categories</a></li>
+            <li><a  href="{{url('forums/moderation')}}">Reported Issues</a></li>
+            <li><a  href="{{url('forums/subscription')}}">Manage Subscription</a></li>
+        </ul>
+    </li>
+    <li class="sub-menu">
+        <a href="javascript:;">
+            <i class="fa fa-user-md"></i>
+            <span>User Management</span>
+        </a>
+        <ul class="sub">
+            <li><a  href="{{url('users/view')}}">Registered Users</a></li>
+            <li><a  href="{{url('users/groups')}}">User Groups</a></li>
+            <li><a  href="{{url('users/manage')}}">Manage Users</a></li>
+            <li><a  href="{{url('users/reports')}}">Reports</a></li>
+        </ul>
+    </li>
+    <li class="sub-menu">
+        <a href="javascript:;">
+            <i class="fa fa-cogs"></i>
+            <span>Settings</span>
+        </a>
+        <ul class="sub">
+            <li><a  href="{{url('settings/site')}}">Site setting</a></li>
+            <li><a  href="{{url('settings/mail')}}">Mail setting</a></li>
+            <li><a  href="{{url('settings/jobs')}}">Background Jobs</a></li>
+            <li><a  href="{{url('settings/reports')}}">Reports</a></li>
+        </ul>
+    </li>
+    <li class="sub-menu">
+        <a href="javascript:;">
+            <i class="fa fa-user"></i>
+            <span>My Profile</span>
+        </a>
+        <ul class="sub">
+            <li><a  href="{{url('settings/site')}}">Site setting</a></li>
+            <li><a  href="{{url('settings/mail')}}">Mail setting</a></li>
+            <li><a  href="{{url('settings/jobs')}}">Background Jobs</a></li>
+            <li><a  href="{{url('settings/reports')}}">Reports</a></li>
+        </ul>
+    </li>
 
-    </ul>
+</ul>
 @stop
 @section('page-scripts-before1')
-    {!!HTML::script("admin/js/jquery.validate.min.js")!!}
+{!!HTML::script("admin/js/jquery.validate.min.js")!!}
     @stop
 @section('page-scripts-before')
      {!!HTML::script("admin/assets/fuelux/js/spinner.min.js")!!}
@@ -166,6 +178,52 @@
     {!!HTML::script("admin/js/form-validation-script.js")!!}
     {!!HTML::script("admin/js/advanced-form-components.js" )!!}
     <script>
+        function getChangeImage(fileuploaded) {
+
+            if(fileuploaded != "")
+            {
+                $.get("<?php echo url('contestant/uploadimage') ?>/"+fileuploaded,function(data){
+                    console.log(data);
+                    if(data != "")
+                    {
+                        $("#preview-pane").html(data);
+                    }
+                });
+            }
+
+        }
+        $('#contestantUploadForm').on('submit',(function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+
+            $.ajax({
+                type:'POST',
+                url:'{{url('contestant/uploadimage')}}',
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    console.log("success");
+                    console.log(data);
+                    if(data != "")
+                    {
+                        document.getElementById('uploadedFileName').value=data;
+                        getChangeImage(data);
+                    }
+
+
+                },
+                error: function(data){
+                    console.log("error");
+                    console.log(data);
+                }
+            });
+        }));
+
+        $("#ImageBrowse").on("change", function() {
+            $("#contestantUploadForm").submit();
+        });
 
         $("#region").change(function () {
             var id1 = this.value;
@@ -180,23 +238,17 @@
 
         $("#contestantForm").validate({
             rules: {
-                first_name: "required",
-                last_name: "required",
-                phone: "required",
+                full_name: "required",
                 region: "required",
                 district: "required",
                 dob: "required",
-                profile_img: "required"
 
             },
             messages: {
-                first_name: "Please enter first_name",
-                last_name: "Please enter module name",
-                phone: "Please enter phone number",
+                full_name: "Please enter full name",
                 region: "Please select region",
                 district: "Please select district",
                 dob: "Please enter date of birth",
-                profile_img: "Please Upload Profile Image"
             }
         });
 
@@ -212,7 +264,7 @@
          <section class="panel">
              <header class="panel-heading">
                  <div class="row">
-                     <div class="col-lg-8"><strong>Register Miss Tanzania Contestant Details</strong></div>
+                     <div class="col-lg-8"><strong>Register Contestant Details</strong></div>
                      <div class="col-lg-4 pull-right">
                          <div class="btn-group btn-group-justified">
                              <a class="btn btn-primary" href="{{url('contestant/create')}}">Register new</a>
@@ -224,93 +276,122 @@
 
              </header>
              <div class="panel-body">
-                 {!! Form::open(array('url'=>'contestant/create','role'=>'form','id'=>'contestantForm','files'=>true)) !!}
-                 <fieldset class="scheduler-border">
-                     <legend class="scheduler-border">Personal  details</legend>
-                     <div class="form-group">
-                         <div class="row">
-                             <div class="col-lg-6">
-                                 <label for="first_name">First Name</label>
-                                 <input type="text" class="form-control" name="first_name" value="{{old('first_name')}}">
-                             </div>
-                             <div class="col-lg-6">
-                                 <label for="last_name">Last Name</label>
-                                 <input type="text" class="form-control" name="last_name" value="{{old('last_name')}}">
-                             </div>
-                         </div>
 
-                     </div>
-                     <div class="form-group">
-                         <div class="row">
-                             <div class="col-lg-6">
-                                 <label for="first_name">Email</label>
-                                 <input type="email" class="form-control" name="email" value="{{old('email')}}">
-                             </div>
-                             <div class="col-lg-6">
-                                 <label for="phone">Phone</label>
-                                 <input type="text" class="form-control" name="phone" value="{{old('phone')}}">
-                             </div>
-                         </div>
+                  <div class="row">
+                      <div class="col-lg-8">
+                          {!! Form::open(array('url'=>'contestant/create','role'=>'form','id'=>'contestantForm','files'=>true)) !!}
+                          <fieldset class="scheduler-border">
+                              <legend class="scheduler-border">Personal  details</legend>
+                              <div class="form-group">
+                                  <div class="row">
+                                      <div class="col-lg-12">
+                                          <label for="first_name">Full Name</label>
+                                          <input type="text" class="form-control" name="full_name" value="{{old('full_name')}}">
+                                      </div>
+                                  </div>
 
-                     </div>
-                     <div class="form-group">
-                         <div class="row">
-                             <div class="col-lg-4">
-                                 <label for="first_name">Region</label>
-                                 <select class="form-control" name="region" id="region">
-                                     <option value="">----select----</option>
-                                     @foreach(\App\Region::orderBy('region_name','ASC')->get() as $region)
-                                         <option value="{{$region->id}}">{{$region->region_name}}</option>
-                                         @endforeach
-                                 </select>
-                             </div>
-                             <div class="col-lg-4">
-                                 <label for="district">District</label>
-                                 <select class="form-control" name="district" id="district">
-                                     <option value="">----select--</option>
-                                 </select>
-                             </div>
-                             <div class="col-lg-4">
-                                 <label for="city">City</label>
-                                 <input type="text" name="city" class="form-control">
-                             </div>
-                         </div>
-
-                     </div>
-                     <div class="form-group">
-                         <div class="row">
-                             <div class="col-lg-4">
-                                 <label for="zone">Date of Birth</label>
-                                 <input class="form-control form-control input-medium default-date-picker" size="16" type="text" value="" name="dob">
-                             </div>
-                             <div class="col-lg-8">
-                                 <label for="zone">Zone</label>
-                                 <input type="text" name="zone" class="form-control">
-                             </div>
-                         </div>
-
-                     </div>
-                     <div class="form-group">
-                         <label for="profile_note">Contestant short note </label>
-                         <textarea class="wysihtml5 form-control" rows="10" name="profile_note"></textarea>
-                     </div>
-                     <div class="form-group">
-                          <div class="row">
-                              <div class="col-lg-4">
-                                  <input type="file" name="profile_img" class="form-control" required>
                               </div>
-                              <div class="col-lg-4">
-                                  <label for="profile_img">Profile Image</label>
+                              <div class="form-group">
+                                  <div class="row">
+                                      <div class="col-lg-6">
+                                          <label for="first_name">Email</label>
+                                          <input type="email" class="form-control" name="email" value="{{old('email')}}">
+                                      </div>
+                                      <div class="col-lg-6">
+                                          <label for="phone">Phone</label>
+                                          <input type="text" class="form-control" name="phone" value="{{old('phone')}}">
+                                      </div>
+                                  </div>
+
                               </div>
-                              <div class="col-lg-2 pull-right">
-                                  <input type="submit" value="Register" class="btn btn-block btn-info ">
+                              <div class="form-group">
+                                  <div class="row">
+                                      <div class="col-lg-4">
+                                          <label for="first_name">Region</label>
+                                          <select class="form-control" name="region" id="region">
+                                              <option value="">----select----</option>
+                                              @foreach(\App\Region::orderBy('region_name','ASC')->get() as $region)
+                                                  <option value="{{$region->id}}">{{$region->region_name}}</option>
+                                              @endforeach
+                                          </select>
+                                      </div>
+                                      <div class="col-lg-4">
+                                          <label for="district">District</label>
+                                          <select class="form-control" name="district" id="district">
+                                              <option value="">----select--</option>
+                                          </select>
+                                      </div>
+                                      <div class="col-lg-4">
+                                          <label for="city">City</label>
+                                          <input type="text" name="city" class="form-control">
+                                      </div>
+                                  </div>
+
                               </div>
+                              <div class="form-group">
+                                  <div class="row">
+                                      <div class="col-lg-4">
+                                          <label for="zone">Date of Birth</label>
+                                          <input class="form-control form-control input-medium default-date-picker" size="16" type="text" value="" name="dob">
+                                      </div>
+                                      <div class="col-lg-8">
+                                          <label for="zone">Zone</label>
+                                          <input type="text" name="zone" class="form-control">
+                                      </div>
+                                  </div>
+
+                              </div>
+                              <div class="form-group">
+                                  <label for="profile_note">Contestant short note </label>
+                                  <textarea class="wysihtml5 form-control" rows="10" name="profile_note"></textarea>
+                              </div>
+                              <div class="form-group">
+                              <div class="row">
+                                  <div class="col-lg-8 col-lg-offset-2">
+                                      <input type="submit" class="btn btn-primary btn-block" value="Register">
+                                      <input type="hidden" name="uploadedFileName" id="uploadedFileName" value="">
+                                  </div>
+                              </div>
+                              </div>
+
+                          </fieldset>
+
+                          {!! Form::close() !!}
+                      </div>
+                      <div class="col-lg-4">
+
+                              <div class="row">
+                                  <div class="col-lg-12">
+                                      <div id="preview-pane">
+                                          <div class="preview-container text-center">
+                                              {!! HTML::image("admin/img/profile_placeholder.png", 'Preview', array('class' => 'jcrop-preview','width' => '90%', 'height' => '250px'))!!}
+
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          <div class="row" style="margin-top: 10px">
+                              {!! Form::open(array('url'=>'contestant/uploadimage','role'=>'form','id'=>'contestantUploadForm','files'=>true)) !!}
+                              <div class="col-lg-12">
+                                  <div class="form-group text-center">
+                                   <span class="btn btn-success fileinput-button">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        <span>Contestant Profile Picture</span>
+                                         <input type="file" id="ImageBrowse" name="ImageBrowse">
+                                        </span>
+                                   </div>
+
+                              </div>
+                              {!! Form::close() !!}
                           </div>
-                     </div>
-                 </fieldset>
-                 {!! Form::close() !!}
+                      </div>
+                  </div>
+
+
+
              </div>
          </section>
+
          <!-- page end-->
      </section>
  @stop

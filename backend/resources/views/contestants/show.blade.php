@@ -1,6 +1,18 @@
 @extends('main.master')
 @section('page-style')
     {!!HTML::style("admin/assets/jquery-ui/jquery-ui-1.10.1.custom.min.css")!!}
+        <!-- blueimp Gallery styles -->
+{!!HTML::style("http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css")!!}
+        <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+{!!HTML::style("admin/assets/file-uploader/css/jquery.fileupload.css")!!}
+{!!HTML::style("admin/assets/file-uploader/css/jquery.fileupload-ui.css")!!}
+        <!-- CSS adjustments for browsers with JavaScript disabled -->
+<noscript>
+    {!!HTML::style("admin/assets/file-uploader/css/jquery.fileupload-noscript.css")!!}
+</noscript>
+<noscript>
+    {!!HTML::style("admin/assets/file-uploader/css/jquery.fileupload-ui-noscript.css")!!}
+</noscript>
 @stop
 @section('page-menus')
     <ul class="sidebar-menu" id="nav-accordion">
@@ -143,7 +155,55 @@
     {!!HTML::script("admin/js/jquery.customSelect.min.js")!!}
 @stop
 @section('page-scripts')
-    {!!HTML::script("admin/js/sliders.js")!!}
+    <script type="text/javascript">
+        $(".deleteC").click(function(){
+            var id1 = $(this).parent().attr('id');
+            $(".deleteC").show("slow").parent().find("span").remove();
+            var btn = $(this).parent().parent();
+            $(this).hide("slow").parent().append("<span><br>Are You Sure <br /> <a href='#s' id='yes' class='btn btn-success btn-xs'><i class='fa fa-check'></i> Yes</a> <a href='#s' id='no' class='btn btn-danger btn-xs'> <i class='fa fa-times'></i> No</a></span>");
+            $("#no").click(function(){
+                $(this).parent().find(".deleteC").show("slow");
+                $(this).parent().find("span").remove();
+            });
+            $("#yes").click(function(){
+                $(this).parent().html("<br><i class='fa fa-spinner fa-spin'></i>deleting...");
+                $.get("<?php echo url('contestant/remove/image') ?>/"+id1,function(data){
+                    btn.hide("slow").next("hr").hide("slow");
+                });
+            });
+        });
+        $('#contestantUploadForm').on('submit',(function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+
+            $.ajax({
+                type:'POST',
+                url:'{{url('contestant/upload/image')}}',
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    console.log("success");
+                    console.log(data);
+                    if(data != "")
+                    {
+                        $("#preview-pane").html(data);
+                    }
+
+
+                },
+                error: function(data){
+                    console.log("error");
+                    console.log(data);
+                }
+            });
+        }));
+
+        $("#ImageBrowse").on("change", function() {
+            $("#contestantUploadForm").submit();
+        });
+    </script>
 
     <script type="text/javascript">
 
@@ -152,6 +212,7 @@
             $(function(){
                 $('select.styled').customSelect();
             });
+
         });
 
 
@@ -169,6 +230,7 @@
                             <a class="btn btn-primary" href="{{url('contestant/create')}}">Register new</a>
                             <a class="btn btn-primary" href="{{url('contestant/manage')}}">Manage</a>
                             <a class="btn btn-primary" href="{{url('contestant/blog')}}">Blog</a>
+
                         </div>
                     </div>
                 </div>
@@ -183,13 +245,13 @@
                             <div class="panel-body">
                                 <div class="col-md-6">
                                     <div class="pro-img-details">
-                                        <img src="{{ asset('admin/img/product-list/pro-thumb-big.jpg') }}" alt=""/>
+                                        <img src="{{ asset('admin/img/contestant_galley/'.$contestant->profile_image) }}" alt="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <h4 class="pro-d-title">
                                         <a href="#" class="text-capitalize">
-                                           {{$contestant->first_name." ".$contestant->last_name}}
+                                           {{$contestant->full_name}}
                                         </a>
                                     </h4>
                                     <div class="product_meta">
@@ -199,9 +261,7 @@
                                         <span class="tagged_as"><strong>Region:</strong> <a rel="tag" href="#">{{$contestant->region->region_name}}</a></span>
                                         <span class="tagged_as"><strong>District:</strong> <a rel="tag" href="#">{{$contestant->district->district_name}}</a></span>
                                     </div>
-                                    <p>
-                                        <?php echo $contestant->profile_note;?>
-                                    </p>
+
                                 </div>
                             </div>
                         </section>
@@ -230,39 +290,24 @@
                             <div class="panel-body">
                                 <div class="tab-content tasi-tab">
                                     <div id="description" class="tab-pane active">
-                                        <h4 class="pro-d-head">Product Description</h4>
-                                        <p> Praesent ac condimentum felis. Nulla at nisl orci, at dignissim dolor, The best product descriptions address your ideal buyer directly and personally. The best product descriptions address your ideal buyer directly and personally. </p>
-                                        <p> Praesent ac condimentum felis. Nulla at nisl orci, at dignissim dolor, The best product descriptions address your ideal buyer directly and personally. The best product descriptions address your ideal buyer directly and personally. The best product descriptions address your ideal buyer directly and personally. The best product descriptions address your ideal buyer directly and personally. </p>
+                                        <h4 class="pro-d-head">Contestant Biography</h4>
+                                            <?php echo $contestant->profile_note;?>
                                     </div>
                                     <div id="reviews" class="tab-pane">
                                         <h4 class="pro-d-head">Visitors Reviews</h4>
-                                        <article class="media">
-                                            <a class="pull-left thumb p-thumb">
-                                                <img src="img/avatar-mini.jpg">
-                                            </a>
-                                            <div class="media-body">
-                                                <a href="#" class="cmt-head">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-                                                <p> <i class="fa fa-time"></i> 1 hours ago</p>
-                                            </div>
-                                        </article>
-                                        <article class="media">
-                                            <a class="pull-left thumb p-thumb">
-                                                <img src="img/avatar-mini2.jpg">
-                                            </a>
-                                            <div class="media-body">
-                                                <a href="#" class="cmt-head">Nulla vel metus scelerisque ante sollicitudin commodo</a>
-                                                <p> <i class="fa fa-time"></i> 23 mins ago</p>
-                                            </div>
-                                        </article>
-                                        <article class="media">
-                                            <a class="pull-left thumb p-thumb">
-                                                <img src="img/avatar-mini3.jpg">
-                                            </a>
-                                            <div class="media-body">
-                                                <a href="#" class="cmt-head">Donec lacinia congue felis in faucibus. </a>
-                                                <p> <i class="fa fa-time"></i> 15 mins ago</p>
-                                            </div>
-                                        </article>
+                                        @if($contestant->reviews != null && count($contestant->reviews) > 0)
+                                            @foreach($contestant->reviews as $review)
+                                                <article class="media">
+                                                    <a class="pull-left thumb p-thumb">
+                                                        <img src="{{ asset('admin/img/avatar-mini.jpg') }}">
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a href="#" class="cmt-head">{{$review->contents}}</a>
+                                                        <p> <i class="fa fa-time"></i> {{date("d,M Y",strtotime($review->date_reviewed))}}</p>
+                                                    </div>
+                                                </article>
+                                          @endforeach
+                                            @endif
                                     </div>
                                     <div id="votes" class="tab-pane">
                                         <h4 class="pro-d-head">Votes</h4>
@@ -273,12 +318,15 @@
                             </div>
                         </section>
 
-                        <div class="row product-list">
+                        <div class="row product-list" id="preview-pane">
+                            @if($contestant->photos != null && count($contestant->photos) > 0)
+                                @foreach($contestant->photos as $photo)
                             <div class="col-md-4">
                                 <section class="panel">
                                     <div class="pro-img-box">
-                                        <img src="{{asset('admin/img/product-list/pro-1.jpg') }}" alt=""/>
+                                        <img src="{{ asset('admin/img/contestant_galley/images/'.$photo->gallery_path) }}" alt="">
 
+                                         <span id="{{$photo->id}}" class="text-center"><a href="#" class="deleteC text-danger"><i class="fa fa-trash-o"></i> </a></span>
                                     </div>
 
                                     <div class="panel-body text-center">
@@ -290,38 +338,23 @@
                                     </div>
                                 </section>
                             </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{asset('admin/img/product-list/pro1.jpg') }}" alt=""/>
-                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="row" style="margin-top: 10px">
+                            {!! Form::open(array('url'=>'contestant/upload/image','role'=>'form','id'=>'contestantUploadForm','files'=>true)) !!}
+                            <div class="col-lg-12">
+                                <div class="form-group text-center">
+                                   <span class="btn btn-success fileinput-button">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        <span>Add More images</span>
+                                         <input type="file" id="ImageBrowse" name="ImageBrowse[]" multiple>
+                                        <input type="hidden" name="contestant_id" id="contestant_id" value="{{$contestant->id}}">
+                                        </span>
+                                </div>
 
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </section>
                             </div>
-                            <div class="col-md-4">
-                                <section class="panel">
-                                    <div class="pro-img-box">
-                                        <img src="{{asset('admin/img/product-list/pro2.jpg') }}" alt=""/>
-
-                                    </div>
-
-                                    <div class="panel-body text-center">
-                                        <h4>
-                                            <a href="#" class="pro-title">
-
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </section>
-                            </div>
-
+                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>

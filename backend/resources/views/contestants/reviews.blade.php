@@ -163,7 +163,7 @@
         <section class="panel">
             <header class="panel-heading">
                 <div class="row">
-                    <div class="col-lg-8"><strong> Miss Tanzania Contestant Details-:Reviews</strong></div>
+                    <div class="col-lg-8"><strong> Contestant Details-:Reviews</strong></div>
                     <div class="col-lg-4 pull-right">
                         <div class="btn-group btn-group-justified">
                             <a class="btn btn-primary" href="{{url('contestant/create')}}">Register new</a>
@@ -183,13 +183,15 @@
                                  <div class="col-md-4">
                                     <section class="panel">
                                         <div class="pro-img-box">
+                                            <a href="{{url('contestant/show/')}}/{{$contr->id}}">
                                             <img src="{{ asset('admin/img/product-list/pro-1.jpg') }}" alt=""/>
+                                            </a>
                                         </div>
 
                                         <div class="panel-body text-center">
                                             <h4>
                                                 <a href="{{url('contestant/show/')}}/{{$contr->id}}" class="pro-title">
-                                                    {{$contr->first_name." ". $contr->last_name}} [{{$contr->region->region_name}}]
+                                                    {{$contr->full_name}} [{{$contr->region->region_name}}]
                                                 </a>
                                             </h4>
                                         </div>

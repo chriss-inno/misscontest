@@ -49,7 +49,28 @@ Route::group(array('middleware' => 'web'), function()
     Route::post('contestant/edit',['middleware' => 'auth', 'uses' =>'ContestantController@update']);
     Route::get('contestant/remove/{id}',['middleware' => 'auth', 'uses' =>'ContestantController@destroy']);
     Route::get('contestant/show/{id}',['middleware' => 'auth', 'uses' =>'ContestantController@show']);
+    Route::post('contestant/uploadimage','ContestantController@uploadImage');
+    Route::post('contestant/upload/image','ContestantController@uploadContestantImage');
+    Route::get('contestant/remove/image/{id}','ContestantController@removeContestantImage');
+    Route::get('contestant/uploadimage/{fileuploaded}','ContestantController@getUploadImage');
 
+    //Contestant Questions
+    Route::get('questions/manage',['middleware' => 'auth', 'uses' =>'ContestantQuestionController@index']);
+    Route::get('questions/create',['middleware' => 'auth', 'uses' =>'ContestantQuestionController@create']);
+    Route::post('questions/create',['middleware' => 'auth', 'uses' =>'ContestantQuestionController@store']);
+    Route::get('questions/edit/{id}',['middleware' => 'auth', 'uses' =>'ContestantQuestionController@edit']);
+    Route::post('questions/edit',['middleware' => 'auth', 'uses' =>'ContestantQuestionController@update']);
+    Route::get('questions/remove/{id}',['middleware' => 'auth', 'uses' =>'ContestantQuestionController@destroy']);
+    Route::get('questions/show/{id}',['middleware' => 'auth', 'uses' =>'ContestantQuestionController@show']);
+
+    //Contestant Questions Answers
+    Route::get('answers',['middleware' => 'auth', 'uses' =>'ReviewAnswersController@index']);
+    Route::get('answers/create',['middleware' => 'auth', 'uses' =>'ReviewAnswersController@create']);
+    Route::post('answers/create',['middleware' => 'auth', 'uses' =>'ReviewAnswersController@store']);
+    Route::get('answers/edit/{id}',['middleware' => 'auth', 'uses' =>'ReviewAnswersController@edit']);
+    Route::post('answers/edit',['middleware' => 'auth', 'uses' =>'ReviewAnswersController@update']);
+    Route::get('answers/remove/{id}',['middleware' => 'auth', 'uses' =>'ReviewAnswersController@destroy']);
+    Route::get('answers/show/{id}',['middleware' => 'auth', 'uses' =>'ReviewAnswersController@edit']);
 
     //User modules
     Route::get('regions/districts/{id}','RegionController@getDistricts');

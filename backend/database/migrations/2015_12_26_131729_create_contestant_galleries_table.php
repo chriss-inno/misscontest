@@ -17,7 +17,7 @@ class CreateContestantGalleriesTable extends Migration
             $table->integer('contestant_id');
             $table->string('gallery_path');
             $table->integer('position');
-            $table->integer('created_by');
+            $table->string('created_by');
             $table->dateTime('publish_up');
             $table->dateTime('publish_down');
             $table->integer('hits');

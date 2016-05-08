@@ -18,8 +18,9 @@ class CreateContestantsTable extends Migration
             $table->string('last_name');
             $table->string('middle_name')->nullable();
             $table->string('nick_name')->nullable();
-            $table->string('email')->unique();
-            $table->string('phone');
+            $table->string('full_name');
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();;
             $table->integer('region_id');
             $table->integer('district_id');
             $table->string('city')->nullable();

@@ -283,8 +283,10 @@
                                    <?php $contest=\App\Contestant::orderBy('hints','Desc')->first();?>
                                    <h1><strong>popular</strong> <br> Contestant of this week</h1>
                                    <div class="desk yellow">
-                                       <h3>{{$contest->first_name." ".$contest->last_name}}</h3>
+                                       @if(count($contest)> 0 && $contest !=null)
+                                       <h3>{{$contest->full_name}}</h3>
                                        <p>{{$contest->profile_note}}</p>
+                                           @endif
                                    </div>
                                </div>
                            </div>
@@ -292,11 +294,13 @@
                        <aside class="post-highlight yellow v-align">
                            <div class="panel-body text-center">
                                <div class="pro-thumb">
+                                   @if(count($contest)> 0 && $contest !=null)
                                    @if($contest->profile_image !="")
                                        <img src="{{ asset('admin/img/contestant_galley/'.$contest->profile_image) }}" alt="">
                                        @else
                                          <img src="{{ asset('admin/img/ring.jpg') }}" alt="">
                                        @endif
+                                   @endif
                                </div>
                            </div>
                        </aside>

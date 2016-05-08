@@ -224,13 +224,9 @@
                     <legend class="scheduler-border">Personal  details</legend>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <label for="first_name">First Name</label>
-                                <input type="text" class="form-control" name="first_name" value="{{$contestant->first_name}}">
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="last_name">Last Name</label>
-                                <input type="text" class="form-control" name="last_name" value="{{$contestant->last_name}}">
+                            <div class="col-lg-12">
+                                <label for="first_name">Full Name</label>
+                                <input type="text" class="form-control" name="first_name" value="{{$contestant->full_name}}">
                             </div>
                         </div>
 

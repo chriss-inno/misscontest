@@ -309,8 +309,7 @@
                         <thead>
                         <tr>
                             <th>SNO</th>
-                            <th>First name</th>
-                            <th>Last Name</th>
+                            <th>Full name</th>
                             <th>Birth date</th>
                             <th>District</th>
                             <th>Region</th>
@@ -322,9 +321,8 @@
                         @foreach($contestants as $contestant)
                         <tr >
                             <td>{{$cont++}}</td>
-                            <td>{{$contestant->first_name}}</td>
-                            <td>{{$contestant->last_name}}</td>
-                            <td>{{$contestant->dob}}</td>
+                            <td>{{$contestant->full_name}}</td>
+                            <td>{{date("d-M-Y",strtotime($contestant->dob))}}</td>
                             <td>{{$contestant->district->district_name}}</td>
                             <td>{{$contestant->region->region_name}}</td>
                             <td id="{{$contestant->id}}">
