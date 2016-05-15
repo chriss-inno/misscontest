@@ -103,9 +103,7 @@ return array(
     'CreateUserPhonesTable' => $baseDir . '/database/migrations/2016_01_19_133633_create_user_phones_table.php',
     'CreateUserRightsTable' => $baseDir . '/database/migrations/2015_12_26_131900_create_user_rights_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
-<<<<<<< HEAD
     'CreateVisitorsReviewsTable' => $baseDir . '/database/migrations/2016_05_07_150556_create_visitors_reviews_table.php',
-=======
     'Cron\\AbstractField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
     'Cron\\CronExpression' => $vendorDir . '/mtdowling/cron-expression/src/Cron/CronExpression.php',
     'Cron\\DayOfMonthField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/DayOfMonthField.php',
@@ -116,7 +114,6 @@ return array(
     'Cron\\MinutesField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/MinutesField.php',
     'Cron\\MonthField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/MonthField.php',
     'Cron\\YearField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/YearField.php',
->>>>>>> e213ec86866ec1fb505e1c2cfaba6a0c5ccb7467
     'DOMPDF' => $vendorDir . '/dompdf/dompdf/include/dompdf.cls.php',
     'DOMPDF_Exception' => $vendorDir . '/dompdf/dompdf/include/dompdf_exception.cls.php',
     'DOMPDF_Image_Exception' => $vendorDir . '/dompdf/dompdf/include/dompdf_image_exception.cls.php',

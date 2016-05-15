@@ -210,13 +210,9 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-12">
-<<<<<<< HEAD
+
                                 <label for="first_name">Full Name</label>
                                 <input type="text" class="form-control" name="first_name" value="{{$contestant->full_name}}">
-=======
-                                <label for="first_name">contestant Name</label>
-                                <input type="text" class="form-control" name="contestant_name" value="{{$contestant->contestant_name}}" placeholder="Enter here contestant name">
->>>>>>> e213ec86866ec1fb505e1c2cfaba6a0c5ccb7467
                             </div>
                         </div>
 

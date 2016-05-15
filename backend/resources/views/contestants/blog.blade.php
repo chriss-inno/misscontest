@@ -154,11 +154,8 @@
         <section class="panel">
             <header class="panel-heading">
                 <div class="row">
-<<<<<<< HEAD
-                    <div class="col-lg-8"><strong> Contestant Details-:Reviews</strong></div>
-=======
+
                     <div class="col-lg-8"><strong> Contestant Details </strong></div>
->>>>>>> e213ec86866ec1fb505e1c2cfaba6a0c5ccb7467
                     <div class="col-lg-4 pull-right">
                         <div class="btn-group btn-group-justified">
                             <a class="btn btn-primary" href="{{url('contestant/create')}}">Register new</a>
@@ -178,23 +175,15 @@
                                 <div class="col-md-4">
                                     <section class="panel">
                                         <div class="pro-img-box">
-<<<<<<< HEAD
                                             <a href="{{url('contestant/show/')}}/{{$contr->id}}">
                                                 <img src="{{ asset('admin/img/product-list/pro-1.jpg') }}" alt=""/>
                                             </a>
-=======
-                                            <img src="{{ asset('admin/img/product-list/pro-1.jpg') }}" alt=""/>
->>>>>>> e213ec86866ec1fb505e1c2cfaba6a0c5ccb7467
                                         </div>
 
                                         <div class="panel-body text-center">
                                             <h4>
                                                 <a href="{{url('contestant/show/')}}/{{$contr->id}}" class="pro-title">
-<<<<<<< HEAD
                                                     {{$contr->full_name}} [{{$contr->region->region_name}}]
-=======
-                                                    {{$contr->contestant_name}} [{{$contr->region->region_name}}]
->>>>>>> e213ec86866ec1fb505e1c2cfaba6a0c5ccb7467
                                                 </a>
                                             </h4>
                                         </div>

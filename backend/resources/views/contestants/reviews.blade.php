@@ -174,23 +174,16 @@
                                  <div class="col-md-4">
                                     <section class="panel">
                                         <div class="pro-img-box">
-<<<<<<< HEAD
                                             <a href="{{url('contestant/show/')}}/{{$contr->id}}">
                                             <img src="{{ asset('admin/img/product-list/pro-1.jpg') }}" alt=""/>
                                             </a>
-=======
-                                            <img src="{{ storage_path() .'/images/'.$contr->profile_image }}" alt="{{$contr->contestant_name}}"/>
->>>>>>> e213ec86866ec1fb505e1c2cfaba6a0c5ccb7467
+
                                         </div>
 
                                         <div class="panel-body text-center">
                                             <h4>
                                                 <a href="{{url('contestant/show/')}}/{{$contr->id}}" class="pro-title">
-<<<<<<< HEAD
                                                     {{$contr->full_name}} [{{$contr->region->region_name}}]
-=======
-                                                    {{$contr->contestant_name}} [{{$contr->region->region_name}}]
->>>>>>> e213ec86866ec1fb505e1c2cfaba6a0c5ccb7467
                                                 </a>
                                             </h4>
                                         </div>

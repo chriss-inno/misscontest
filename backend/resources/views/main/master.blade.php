@@ -34,11 +34,7 @@
             <div data-original-title="Toggle Navigation" data-placement="right" class="fa fa-bars tooltips"></div>
         </div>
         <!--logo start-->
-<<<<<<< HEAD
-        <a href="#" class="logo" >Miss Tanzania Contest</a>
-=======
-        <a href="index.html" class="logo" >Contest</a>
->>>>>>> e213ec86866ec1fb505e1c2cfaba6a0c5ccb7467
+        <a href="#" class="logo" >Contest</a>
         <!--logo end-->
         <div class="top-nav ">
             <ul class="nav pull-right top-menu">
