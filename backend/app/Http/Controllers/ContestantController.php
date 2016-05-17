@@ -77,7 +77,6 @@ class ContestantController extends Controller
         $contestant->contest_year=date("Y");
         $contestant->save();
 
-        echo $request->uploadedFileName;
 
         if($request->uploadedFileName !="")
         {
@@ -137,9 +136,8 @@ class ContestantController extends Controller
         //
 
 
-        $contestant= Contestant::find($request->conte_id);
+        $contestant= Contestant::find($request->id);
         $contestant->full_name=$request->full_name;
-        $contestant->last_name=$request->last_name;
         $contestant->email=$request->email;
         $contestant->phone=$request->phone;
         $contestant->region_id=$request->region;
@@ -153,20 +151,22 @@ class ContestantController extends Controller
         $contestant->contest_year=date("Y");
         $contestant->save();
 
-        //Generate reference number
-        $reference_no= $contestant->id.date("Ymi");
-        $contestant->reference_no=$reference_no;
-        $contestant->save();
-        //check if attachment
+        if($request->uploadedFileName !="")
+        {
+            $newfile = "C:/xampp/htdocs/miss/admin/img/contestant_galley/".$request->uploadedFileName;
+            $oldfile = "C:/xampp/htdocs/miss/admin/img/profile/".$request->uploadedFileName;
 
-        $file= $request->file('profile_img');
-        $destinationPath = storage_path() .'/images/';
-        $filename  =  $contestant->reference_no. '.'.$file->getClientOriginalExtension();
-
-        $file->move($destinationPath, $filename);
-
-        $contestant->profile_image= $filename;
-        $contestant->save();
+            if(! File::exists($newfile)) {
+                File::move($oldfile, $newfile);
+                $contestant->profile_image=$request->uploadedFileName;
+                $contestant->save();
+            }
+            else
+            {
+                $contestant->profile_image=$request->uploadedFileName;
+                $contestant->save();
+            }
+        }
 
         return redirect('contestant/manage');
 

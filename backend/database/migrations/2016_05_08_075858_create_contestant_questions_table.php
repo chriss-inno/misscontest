@@ -17,6 +17,10 @@ class CreateContestantQuestionsTable extends Migration
             $table->string('question_title');
             $table->string('question_type')->nullable();
             $table->string('question_category')->nullable();
+            $table->integer('region_id')->nullable();
+            $table->integer('district_id')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zone')->nullable();
             $table->string('input_by');
             $table->string('status');
             $table->timestamps();

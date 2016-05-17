@@ -11,7 +11,28 @@
                 <span>Dashboard</span>
             </a>
         </li>
-
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-users"></i>
+                <span>Contestants</span>
+            </a>
+            <ul class="sub">
+                <li><a  href="{{url('contestant/create')}}">Registration</a></li>
+                <li><a  href="{{url('contestant/manage')}}">Manage contestants</a></li>
+                <li><a  href="{{url('contestant/reviews')}}">Contestants Reviews</a></li>
+                <li><a  href="{{url('contestant/blog')}}">Profile Blog</a></li>
+            </ul>
+        </li>
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-users"></i>
+                <span>Review Questions </span>
+            </a>
+            <ul class="sub">
+                <li><a  href="{{url('questions/manage')}}">Manage Questions</a></li>
+                <li><a  href="{{url('answers/manage')}}">Manage Answers</a></li>
+            </ul>
+        </li>
         <li class="sub-menu">
             <a href="javascript:;">
                 <i class="fa fa-laptop"></i>
@@ -37,29 +58,8 @@
                 <li><a  href="{{url('menus/groups')}}">Menu Groups</a></li>
             </ul>
         </li>
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-chain"></i>
-                <span>Polls</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('polls/create')}}">Create Poll</a></li>
-                <li><a  href="{{url('polls/groups')}}">Manage Polls</a></li>
-            </ul>
-        </li>
 
-        <li class="sub-menu">
-            <a href="javascript:;">
-                <i class="fa fa-users"></i>
-                <span>Contestants</span>
-            </a>
-            <ul class="sub">
-                <li><a  href="{{url('contestant/create')}}">Registration</a></li>
-                <li><a  href="{{url('contestant/manage')}}">Manage contestants</a></li>
-                <li><a  href="{{url('contestant/reviews')}}">Contestants Reviews</a></li>
-                <li><a  href="{{url('contestant/blog')}}">Profile Blog</a></li>
-            </ul>
-        </li>
+
 
         <li class="sub-menu">
             <a href="javascript:;">
@@ -116,10 +116,8 @@
                 <span>My Profile</span>
             </a>
             <ul class="sub">
-                <li><a  href="{{url('settings/site')}}">Site setting</a></li>
-                <li><a  href="{{url('settings/mail')}}">Mail setting</a></li>
-                <li><a  href="{{url('settings/jobs')}}">Background Jobs</a></li>
-                <li><a  href="{{url('settings/reports')}}">Reports</a></li>
+                <li><a  href="{{url('profile')}}">My profile</a></li>
+                <li><a  href="{{url('logout')}}">Logout</a></li>
             </ul>
         </li>
 
@@ -283,7 +281,7 @@
                                <div class="pro-thumb">
                                    @if(count($contest)> 0 && $contest !=null)
                                    @if($contest->profile_image !="")
-                                       <img src="{{ asset(storage_path().'/images/'.$contest->profile_image) }}" alt="">
+                                           <img src="{{ asset('admin/img/contestant_galley/'.$contest->profile_image) }}" alt="{{$contest->full_name}}">
                                        @else
                                          <img src="{{ asset('admin/img/ring.jpg') }}" alt="">
                                        @endif

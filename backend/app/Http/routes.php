@@ -59,12 +59,14 @@ Route::group(array('middleware' => 'web'), function()
     Route::get('questions/create',['middleware' => 'auth', 'uses' =>'ContestantQuestionController@create']);
     Route::post('questions/create',['middleware' => 'auth', 'uses' =>'ContestantQuestionController@store']);
     Route::get('questions/edit/{id}',['middleware' => 'auth', 'uses' =>'ContestantQuestionController@edit']);
+    Route::get('questions/answers/{id}',['middleware' => 'auth', 'uses' =>'ReviewAnswersController@getAnswers']);
     Route::post('questions/edit',['middleware' => 'auth', 'uses' =>'ContestantQuestionController@update']);
     Route::get('questions/remove/{id}',['middleware' => 'auth', 'uses' =>'ContestantQuestionController@destroy']);
     Route::get('questions/show/{id}',['middleware' => 'auth', 'uses' =>'ContestantQuestionController@show']);
+    Route::get('questions/gerLocation',['middleware' => 'auth', 'uses' =>'ContestantQuestionController@getLocation']);
 
     //Contestant Questions Answers
-    Route::get('answers',['middleware' => 'auth', 'uses' =>'ReviewAnswersController@index']);
+    Route::get('answers/manage',['middleware' => 'auth', 'uses' =>'ReviewAnswersController@index']);
     Route::get('answers/create',['middleware' => 'auth', 'uses' =>'ReviewAnswersController@create']);
     Route::post('answers/create',['middleware' => 'auth', 'uses' =>'ReviewAnswersController@store']);
     Route::get('answers/edit/{id}',['middleware' => 'auth', 'uses' =>'ReviewAnswersController@edit']);

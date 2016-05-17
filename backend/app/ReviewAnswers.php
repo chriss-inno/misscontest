@@ -7,4 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class ReviewAnswers extends Model
 {
     //
+    public function question()
+    {
+        return $this->belongsTo('\App\ContestantQuestion','question_id');
+    }
 }

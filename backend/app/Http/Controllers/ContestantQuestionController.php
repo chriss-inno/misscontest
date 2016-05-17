@@ -45,6 +45,13 @@ class ContestantQuestionController extends Controller
         $question->question_title=$request->question_title;
         $question->question_type=$request->question_type;
         $question->status=$request->status;
+        if($request->question_type =="Location Based")
+        {
+            $question->region_id=$request->region;
+            $question->district_id=$request->district;
+            $question->city=$request->city;
+            $question->zone=$request->zone;
+        }
         $question->input_by=Auth::user()->username;
         $question->save();
         return "Question Created";
@@ -57,6 +64,13 @@ class ContestantQuestionController extends Controller
         $question->question_title=$request->question_title;
         $question->question_type=$request->question_type;
         $question->status=$request->status;
+        if($request->question_type =="Location Based")
+        {
+            $question->region_id=$request->region;
+            $question->district_id=$request->district;
+            $question->city=$request->city;
+            $question->zone=$request->zone;
+        }
         $question->input_by=Auth::user()->username;
         $question->save();
         return "Question Updated";
@@ -66,7 +80,16 @@ class ContestantQuestionController extends Controller
     {
         //
         $question=ContestantQuestion::find($id);
+        foreach($question->answers as $asw)
+        {
+            $asw->delete();
+        }
         $question->delete();
         return redirect('questions/manage');
+    }
+    
+    public function getLocation()
+    {
+        return view('question.location');
     }
 }

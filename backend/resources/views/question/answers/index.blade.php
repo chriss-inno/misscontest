@@ -152,7 +152,7 @@
                         });
                         $("#yes").click(function(){
                             $(this).parent().html("<br><i class='fa fa-spinner fa-spin'></i>deleting...");
-                            $.get("<?php echo url('questions/remove') ?>/"+id1,function(data){
+                            $.get("<?php echo url('answers/remove') ?>/"+id1,function(data){
                                 btn.hide("slow").next("hr").hide("slow");
                             });
                         });
@@ -165,7 +165,7 @@
                         modaldis+= '<div class="modal-content">';
                         modaldis+= '<div class="modal-header">';
                         modaldis+= '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
-                        modaldis+= '<span id="myModalLabel" class="h2 modal-title text-center" style="color: #FFF">Update Question</span>';
+                        modaldis+= '<span id="myModalLabel" class="h2 modal-title text-center" style="color: #FFF">Update</span>';
                         modaldis+= '</div>';
                         modaldis+= '<div class="modal-body">';
                         modaldis+= ' </div>';
@@ -176,7 +176,7 @@
                         $("body").append(modaldis);
                         $("#myModal").modal("show");
                         $(".modal-body").html("<h3><i class='fa fa-spin fa-spinner '></i><span>loading...</span><h3>");
-                        $(".modal-body").load("<?php echo url("questions/edit") ?>/"+id1);
+                        $(".modal-body").load("<?php echo url("answers/edit") ?>/"+id1);
                         $("#myModal").on('hidden.bs.modal',function(){
                             $("#myModal").remove();
                         })
@@ -191,7 +191,7 @@
                         modaldis+= '<div class="modal-content">';
                         modaldis+= '<div class="modal-header">';
                         modaldis+= '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
-                        modaldis+= '<span id="myModalLabel" class="h2 modal-title text-center text-info text-center" style="color: #FFF;">CREATE NEW QUESTION </span>';
+                        modaldis+= '<span id="myModalLabel" class="h2 modal-title text-center text-info text-center" style="color: #FFF;">CREATE NEW REVIEW </span>';
                         modaldis+= '</div>';
                         modaldis+= '<div class="modal-body">';
                         modaldis+= ' </div>';
@@ -202,7 +202,7 @@
                         $("body").append(modaldis);
                         $("#myModal").modal("show");
                         $(".modal-body").html("<h3><i class='fa fa-spin fa-spinner '></i><span>loading...</span><h3>");
-                        $(".modal-body").load("<?php echo url("questions/create") ?>");
+                        $(".modal-body").load("<?php echo url("answers/create") ?>");
                         $("#myModal").on('hidden.bs.modal',function(){
                             $("#myModal").remove();
                         })
@@ -218,7 +218,7 @@
                         modaldis+= '<div class="modal-content">';
                         modaldis+= '<div class="modal-header">';
                         modaldis+= '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
-                        modaldis+= '<span id="myModalLabel" class="h2 modal-title text-center text-info text-center" style="color: #FFF;">Customer Issue details</span>';
+                        modaldis+= '<span id="myModalLabel" class="h2 modal-title text-center text-info text-center" style="color: #FFF;">Details</span>';
                         modaldis+= '</div>';
                         modaldis+= '<div class="modal-body">';
                         modaldis+= ' </div>';
@@ -273,12 +273,12 @@
         <section class="panel">
             <header class="panel-heading">
                 <div class="row">
-                    <div class="col-lg-8"><strong>Manage Contestant review questions</strong></div>
+                    <div class="col-lg-8"><strong>Manage Contestant reviews</strong></div>
                     <div class="col-lg-4 pull-right">
                         <div class="btn-group btn-group-justified">
                             <a class="createQuestion btn btn-primary" href="#"><i class="fa fa-file-o"></i> Create New</a>
-                            <a class="btn btn-primary" href="{{url('questions/manage')}}"><i class="fa fa-cogs"></i> Manage</a>
-                            <a class="btn btn-primary" href="{{url('answers/manage')}}"><i class="fa fa-list"></i> Reviews</a>
+                            <a class="btn btn-primary" href="{{url('answers/manage')}}"><i class="fa fa-cogs"></i> Manage</a>
+                            <a class="btn btn-primary" href="{{url('questions/manage')}}"><i class="fa fa-backward"></i> Back</a>
                         </div>
                     </div>
                 </div>
@@ -290,21 +290,21 @@
                         <thead>
                         <tr>
                             <th>SNO</th>
+                            <th>Review set</th>
                             <th>Question Title</th>
-                            <th>Type</th>
-                            <th>Answers</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php $cont=1;?>
-                        @foreach($questions as $question)
+                        @foreach($answers as $answer)
                             <tr >
                                 <td>{{$cont++}}</td>
-                                <td>{{$question->question_title}}</td>
-                                <td class="text-center">{{$question->question_type}}</td>
-                                <td class="text-center"> <a href="{{url('questions/answers')}}/{{$question->id}}" class="btn btn-success btn-xs"><i class="fa fa-list"></i></a></td>
-                                <td id="{{$question->id}}" class="text-center">
+                                <td >{{$answer->question->question_title}}</td>
+                                <td>{{$answer->answer}}</td>
+                                <td>{{$answer->status}}</td>
+                                <td id="{{$answer->id}}" class="text-center">
                                     <a href="#" class="showQuestion btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
                                     <a href="#" class="editQuestion btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
                                     <a href="#" class="deleteC btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>

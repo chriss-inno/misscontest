@@ -37,7 +37,52 @@
     </div>
 
 </fieldset>
-
+@if($question->question_type =="Location Based")
+    <div id="locationBased">
+     <fieldset class="scheduler-border">
+    <legend class="scheduler-border" style="color:#005DAD">Location details</legend>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-lg-4">
+                <label for="first_name">Region</label>
+                <select class="form-control" name="region" id="region" onchange="getDistricts(this)">
+                    @if($question->region_id !="")
+                        <?php $reg= \App\Region::find($question->region_id)?>
+                        <option value="{{$reg->id}}" selected>{{$reg->region_name}}</option>
+                    @else
+                        <option value="">----select----</option>
+                    @endif
+                    @foreach(\App\Region::orderBy('region_name','ASC')->get() as $region)
+                        <option value="{{$region->id}}">{{$region->region_name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-lg-4">
+                <label for="district">District</label>
+                <select class="form-control" name="district" id="district">
+                    @if($question->district_id !="")
+                        <?php $dist= \App\District::find($question->district_id)?>
+                        <option value="{{$dist->id}}" selected>{{$dist->district_name}}</option>
+                    @else
+                        <option value="">----select----</option>
+                    @endif
+                </select>
+            </div>
+            <div class="col-lg-4">
+                <label for="city">City</label>
+                <input type="text" name="city" class="form-control" value="{{$question->city}}">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="zone">Zone</label>
+        <input type="text" name="zone" class="form-control" value="{{$question->zone}}">
+    </div>
+</fieldset>
+    </div>
+    @else
+    <div id="locationBased"> </div>
+@endif
 <div class="form-group">
     <div class="row">
         <div class="col-md-2 col-sm-2 col-xs-2 pull-right">
@@ -57,16 +102,28 @@
 {!!HTML::script("admin/js/form-validation-script.js")!!}
 <script>
 
-    $("#branch_id").change(function () {
+    $("#question_type").change(function () {
         var id1 = this.value;
-        if(id1 != "")
+        if(id1== "Location Based")
         {
-            $.get("<?php echo url('getDepartment') ?>/"+id1,function(data){
-                $("#department_id").html(data);
+            $.get("<?php echo url('questions/gerLocation') ?>",function(data){
+                $("#locationBased").html(data);
             });
 
-        }else{$("#department_id").html("<option value=''>----</option>");}
+        }else{$("#locationBased").html("");}
     });
+
+    function getDistricts(value) {
+        var id1 = value.value;
+        if(id1 != "")
+        {
+            $.get("<?php echo url('regions/districts') ?>/"+id1,function(data){
+                $("#district").html(data);
+            });
+
+        }else{$("#district").html("<option value=''>----</option>");}
+    }
+
 
     $("#QuestionForm").validate({
         rules: {

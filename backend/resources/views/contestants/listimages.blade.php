@@ -3,7 +3,7 @@
         <div class="col-md-4">
             <section class="panel">
                 <div class="pro-img-box">
-                    <img src="{{ asset('admin/img/contestant_galley/images/'.$photo->gallery_path) }}" alt="">
+                    <img src="{{ asset('admin/img/contestant_galley/images/'.$photo->gallery_path) }}" alt="" width="300" height="250">
                     <span id="{{$photo->id}}" class="text-center"><a href="#" class="deleteC text-danger"><i class="fa fa-trash-o"></i> </a></span>
                 </div>
 

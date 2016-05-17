@@ -2,12 +2,24 @@
 @section('page-style')
     {!!HTML::style("admin/assets/bootstrap-fileupload/bootstrap-fileupload.css" )!!}
     {!!HTML::style("admin/assets/bootstrap-wysihtml5/bootstrap-wysihtml5.css" )!!}
-    {!!HTML::style("admin/assets/bootstrap-wysihtml5/wysiwyg-color.css" )!!}
     {!!HTML::style("admin/assets/bootstrap-datepicker/css/datepicker.css"  )!!}
     {!!HTML::style("admin/assets/bootstrap-timepicker/compiled/timepicker.css"  )!!}
     {!!HTML::style("admin/assets/bootstrap-colorpicker/css/colorpicker.css"  )!!}
     {!!HTML::style("admin/assets/bootstrap-daterangepicker/daterangepicker-bs3.css"  )!!}
     {!!HTML::style("admin/assets/bootstrap-datetimepicker/css/datetimepicker.css"  )!!}
+
+    <!-- blueimp Gallery styles -->
+    {!!HTML::style("http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css")!!}
+    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+    {!!HTML::style("admin/assets/file-uploader/css/jquery.fileupload.css")!!}
+    {!!HTML::style("admin/assets/file-uploader/css/jquery.fileupload-ui.css")!!}
+    <!-- CSS adjustments for browsers with JavaScript disabled -->
+    <noscript>
+        {!!HTML::style("admin/assets/file-uploader/css/jquery.fileupload-noscript.css")!!}
+    </noscript>
+    <noscript>
+        {!!HTML::style("admin/assets/file-uploader/css/jquery.fileupload-ui-noscript.css")!!}
+    </noscript>
 
 @stop
 @section('page-menus')
@@ -95,6 +107,19 @@
         </li>
         <li class="sub-menu">
             <a href="javascript:;">
+                <i class="fa fa-envelope"></i>
+                <span>Member Forums</span>
+            </a>
+            <ul class="sub">
+                <li><a  href="{{url('forums/create')}}">Create Forum</a></li>
+                <li><a  href="{{url('forums/view')}}">Manage Forum</a></li>
+                <li><a  href="{{url('forums/categories')}}">Forum Categories</a></li>
+                <li><a  href="{{url('forums/moderation')}}">Reported Issues</a></li>
+                <li><a  href="{{url('forums/subscription')}}">Manage Subscription</a></li>
+            </ul>
+        </li>
+        <li class="sub-menu">
+            <a href="javascript:;">
                 <i class="fa fa-user-md"></i>
                 <span>User Management</span>
             </a>
@@ -153,6 +178,52 @@
     {!!HTML::script("admin/js/form-validation-script.js")!!}
     {!!HTML::script("admin/js/advanced-form-components.js" )!!}
     <script>
+        function getChangeImage(fileuploaded) {
+
+            if(fileuploaded != "")
+            {
+                $.get("<?php echo url('contestant/uploadimage') ?>/"+fileuploaded,function(data){
+                    console.log(data);
+                    if(data != "")
+                    {
+                        $("#preview-pane").html(data);
+                    }
+                });
+            }
+
+        }
+        $('#contestantUploadForm').on('submit',(function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+
+            $.ajax({
+                type:'POST',
+                url:'{{url('contestant/uploadimage')}}',
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    console.log("success");
+                    console.log(data);
+                    if(data != "")
+                    {
+                        document.getElementById('uploadedFileName').value=data;
+                        getChangeImage(data);
+                    }
+
+
+                },
+                error: function(data){
+                    console.log("error");
+                    console.log(data);
+                }
+            });
+        }));
+
+        $("#ImageBrowse").on("change", function() {
+            $("#contestantUploadForm").submit();
+        });
 
         $("#region").change(function () {
             var id1 = this.value;
@@ -167,24 +238,25 @@
 
         $("#contestantForm").validate({
             rules: {
-                contestant_name: "required",
-                phone: "required",
+                full_name: "required",
                 region: "required",
                 district: "required",
                 dob: "required",
 
             },
             messages: {
-                contestant_name: "Please enter contestant name",
-                phone: "Please enter phone number",
+                full_name: "Please enter full name",
                 region: "Please select region",
                 district: "Please select district",
-                dob: "Please enter date of birth"
+                dob: "Please enter date of birth",
             }
         });
 
     </script>
 
+@stop
+@section('page-title')
+    Contestant Registration
 @stop
 @section('contents')
     <section class="wrapper site-min-height">
@@ -192,7 +264,7 @@
         <section class="panel">
             <header class="panel-heading">
                 <div class="row">
-                    <div class="col-lg-8"><strong>Register Miss Tanzania Contestant Details</strong></div>
+                    <div class="col-lg-8"><strong>Update Contestant Details</strong></div>
                     <div class="col-lg-4 pull-right">
                         <div class="btn-group btn-group-justified">
                             <a class="btn btn-primary" href="{{url('contestant/create')}}">Register new</a>
@@ -204,97 +276,136 @@
 
             </header>
             <div class="panel-body">
-                {!! Form::open(array('url'=>'contestant/edit','role'=>'form','id'=>'contestantForm')) !!}
-                <fieldset class="scheduler-border">
-                    <legend class="scheduler-border">Personal  details</legend>
-                    <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-8">
+                        {!! Form::open(array('url'=>'contestant/edit','role'=>'form','id'=>'contestantForm','files'=>true)) !!}
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">Personal  details</legend>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label for="first_name">Full Name</label>
+                                        <input type="text" class="form-control" name="full_name" value="{{$contestant->full_name}}">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="first_name">Email</label>
+                                        <input type="email" class="form-control" name="email" value="{{$contestant->email}}">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="phone">Phone</label>
+                                        <input type="text" class="form-control" name="phone" value="{{$contestant->phone}}">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label for="first_name">Region</label>
+                                        <select class="form-control" name="region" id="region">
+                                            @if($contestant->region !="")
+                                                <?php $reg= \App\Region::find($contestant->region_id)?>
+                                            <option value="{{$reg->id}}" selected>{{$reg->region_name}}</option>
+                                            @else
+                                                <option value="">----select----</option>
+                                                @endif
+                                            @foreach(\App\Region::orderBy('region_name','ASC')->get() as $region)
+                                                <option value="{{$region->id}}">{{$region->region_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label for="district">District</label>
+                                        <select class="form-control" name="district" id="district">
+                                            @if($contestant->district !="")
+                                                <?php $dist= \App\District::find($contestant->district_id)?>
+                                                <option value="{{$dist->id}}" selected>{{$dist->district_name}}</option>
+                                            @else
+                                                <option value="">----select----</option>
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label for="city">City</label>
+                                        <input type="text" name="city" class="form-control" value="{{$contestant->city}}">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label for="zone">Date of Birth</label>
+                                        <input class="form-control form-control input-medium default-date-picker" size="16" type="text" value="{{$contestant->dob}}" name="dob">
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <label for="zone">Zone</label>
+                                        <input type="text" name="zone" class="form-control" value="{{$contestant->zone}}">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="profile_note">Contestant short note </label>
+                                <textarea class="wysihtml5 form-control" rows="10" name="profile_note">{{$contestant->profile_note}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-8 col-lg-offset-2">
+                                        <input type="submit" class="btn btn-primary btn-block" value="Submit">
+                                        <input type="hidden" name="id" id="id" value="{{$contestant->id}}">
+                                        <input type="hidden" name="uploadedFileName" id="uploadedFileName" value="{{$contestant->profile_image}}">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+
+                        {!! Form::close() !!}
+                    </div>
+                    <div class="col-lg-4">
+
                         <div class="row">
                             <div class="col-lg-12">
-
-                                <label for="first_name">Full Name</label>
-                                <input type="text" class="form-control" name="first_name" value="{{$contestant->full_name}}">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <label for="first_name">Email</label>
-                                <input type="email" class="form-control" name="email" value="{{$contestant->email}}">
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="phone">Phone</label>
-                                <input type="text" class="form-control" name="phone" value="{{$contestant->phone}}">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <label for="first_name">Region</label>
-                                <select class="form-control" name="region" id="region">
-                                    <option value="{{$contestant->region->id}}">{{$contestant->region->region_name}}</option>
-                                    <option value="">----select----</option>
-                                    @foreach(\App\Region::orderBy('region_name','ASC')->get() as $region)
-                                        <option value="{{$region->id}}">{{$region->region_name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="district">District</label>
-                                <select class="form-control" name="district" id="district">
-                                    <option value="{{$contestant->district->id}}">{{$contestant->district->district_name}}</option>
-                                    <option value="">----select--</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="city">City</label>
-                                <input type="text" name="city" class="form-control" value="{{$contestant->city}}">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <label for="zone">Date of Birth</label>
-                                <input class="form-control form-control input-medium default-date-picker" size="16" type="text" value="{{$contestant->city}}" name="dob">
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="gender">Gender</label>
-                                <select name="gender" id="gender" required class="form-control">
-                                    <option value="">--Select Gender--</option>
-                                    @if($contestant->gender != null && $contestant->gender !="")
-                                        <option value="{{$contestant->gender}}">{{$contestant->gender}}</option>
+                                <div id="preview-pane">
+                                    <div class="preview-container text-center">
+                                        @if($contestant->profile_image !="")
+                                            {!! HTML::image('admin/img/contestant_galley/'.$contestant->profile_image, 'Preview', array('class' => 'jcrop-preview','width' => '90%', 'height' => '250px'))!!}
+                                        @else
+                                            {!! HTML::image("admin/img/profile_placeholder.png", 'Preview', array('class' => 'jcrop-preview','width' => '90%', 'height' => '250px'))!!}
                                         @endif
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-8">
-                                <label for="zone">Zone</label>
-                                <input type="text" name="zone" class="form-control">
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="profile_note">Contestant short note </label>
-                        <textarea class="wysihtml5 form-control" rows="10" name="profile_note">{{$contestant->profile_note}}</textarea>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-2 pull-right">
-                                <input type="submit" value="Update details" class="btn btn-block btn-info ">
-                                <input type="hidden" name="conte_id" value="{{$contestant->id}}">
+                        <div class="row" style="margin-top: 10px">
+                            {!! Form::open(array('url'=>'contestant/uploadimage','role'=>'form','id'=>'contestantUploadForm','files'=>true)) !!}
+                            <div class="col-lg-12">
+                                <div class="form-group text-center">
+                                   <span class="btn btn-success fileinput-button">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        <span>Contestant Profile Picture</span>
+                                         <input type="file" id="ImageBrowse" name="ImageBrowse">
+                                        </span>
+                                </div>
+
                             </div>
+                            {!! Form::close() !!}
                         </div>
                     </div>
-                </fieldset>
-                {!! Form::close() !!}
+                </div>
+
+
+
             </div>
         </section>
+
         <!-- page end-->
     </section>
 @stop

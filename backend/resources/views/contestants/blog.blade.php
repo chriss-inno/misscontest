@@ -176,7 +176,7 @@
                                     <section class="panel">
                                         <div class="pro-img-box">
                                             <a href="{{url('contestant/show/')}}/{{$contr->id}}">
-                                                <img src="{{ asset('admin/img/product-list/pro-1.jpg') }}" alt=""/>
+                                                <img src="{{ asset('admin/img/contestant_galley/'.$contr->profile_image) }}" alt=" {{$contr->full_name}}" width="300" height="250"/>
                                             </a>
                                         </div>
 

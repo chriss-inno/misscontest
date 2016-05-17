@@ -249,7 +249,7 @@
                                 <div class="col-md-6">
                                     <div class="pro-img-details">
 
-                                        <img src="{{ asset('admin/img/contestant_galley/'.$contestant->profile_image) }}" alt="">
+                                        <img src="{{ asset('admin/img/contestant_galley/'.$contestant->profile_image) }}" alt="{{$contestant->full_name}}" width="300" height="300">
 
                                     </div>
                                 </div>
@@ -329,7 +329,7 @@
                             <div class="col-md-4">
                                 <section class="panel">
                                     <div class="pro-img-box">
-                                        <img src="{{ asset('admin/img/contestant_galley/images/'.$photo->gallery_path) }}" alt="">
+                                        <img src="{{ asset('admin/img/contestant_galley/images/'.$photo->gallery_path) }}" alt="" width="300" height="250">
 
                                          <span id="{{$photo->id}}" class="text-center"><a href="#" class="deleteC text-danger"><i class="fa fa-trash-o"></i> </a></span>
                                     </div>
