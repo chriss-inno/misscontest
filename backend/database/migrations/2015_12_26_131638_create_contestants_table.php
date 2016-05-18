@@ -14,12 +14,17 @@ class CreateContestantsTable extends Migration
     {
         Schema::create('contestants', function (Blueprint $table) {
             $table->increments('id');
+
             $table->string('first_name');
             $table->string('last_name');
             $table->string('middle_name')->nullable();
             $table->string('nick_name')->nullable();
-            $table->string('email')->unique();
-            $table->string('phone');
+            $table->string('full_name');
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();;
+            $table->string('reference_no',20);
+            $table->string('contestant_name');
+            $table->string('gender')->nullable();
             $table->integer('region_id');
             $table->integer('district_id');
             $table->string('city')->nullable();

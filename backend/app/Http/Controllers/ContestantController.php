@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Contestant;
+use App\ContestantGallery;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\File;
 
 class ContestantController extends Controller
 {
@@ -34,7 +39,7 @@ class ContestantController extends Controller
     public function getReviews()
     {
         $contestants=Contestant::all();
-        return view('contestants.blog',compact('contestants'));
+        return view('contestants.reviews',compact('contestants'));
     }
 
     /**
@@ -58,10 +63,7 @@ class ContestantController extends Controller
     {
         //
         $contestant=new Contestant;
-        $contestant->first_name=$request->first_name;
-        $contestant->last_name=$request->last_name;
-        $contestant->middle_name=$request->middle_name;
-        $contestant->nick_name=$request->nick_name;
+        $contestant->full_name=$request->full_name;
         $contestant->email=$request->email;
         $contestant->phone=$request->phone;
         $contestant->region_id=$request->region;
@@ -74,6 +76,24 @@ class ContestantController extends Controller
         $contestant->dob=$request->dob;
         $contestant->contest_year=date("Y");
         $contestant->save();
+
+
+        if($request->uploadedFileName !="")
+        {
+            $newfile = "C:/xampp/htdocs/miss/admin/img/contestant_galley/".$request->uploadedFileName;
+            $oldfile = "C:/xampp/htdocs/miss/admin/img/profile/".$request->uploadedFileName;
+
+            if(! File::exists($newfile)) {
+                File::move($oldfile, $newfile);
+                $contestant->profile_image=$request->uploadedFileName;
+                $contestant->save();
+            }
+            else
+            {
+                $contestant->profile_image=$request->uploadedFileName;
+                $contestant->save();
+            }
+        }
 
        return redirect('contestant/manage');
     }
@@ -114,11 +134,10 @@ class ContestantController extends Controller
     public function update(Request $request)
     {
         //
-        $contestant= Contestant::find($request->conte_id);
-        $contestant->first_name=$request->first_name;
-        $contestant->last_name=$request->last_name;
-        $contestant->middle_name=$request->middle_name;
-        $contestant->nick_name=$request->nick_name;
+
+
+        $contestant= Contestant::find($request->id);
+        $contestant->full_name=$request->full_name;
         $contestant->email=$request->email;
         $contestant->phone=$request->phone;
         $contestant->region_id=$request->region;
@@ -131,6 +150,23 @@ class ContestantController extends Controller
         $contestant->dob=$request->dob;
         $contestant->contest_year=date("Y");
         $contestant->save();
+
+        if($request->uploadedFileName !="")
+        {
+            $newfile = "C:/xampp/htdocs/miss/admin/img/contestant_galley/".$request->uploadedFileName;
+            $oldfile = "C:/xampp/htdocs/miss/admin/img/profile/".$request->uploadedFileName;
+
+            if(! File::exists($newfile)) {
+                File::move($oldfile, $newfile);
+                $contestant->profile_image=$request->uploadedFileName;
+                $contestant->save();
+            }
+            else
+            {
+                $contestant->profile_image=$request->uploadedFileName;
+                $contestant->save();
+            }
+        }
 
         return redirect('contestant/manage');
 
@@ -148,4 +184,108 @@ class ContestantController extends Controller
         $contestant=Contestant::find($id);
         $contestant->delete();
     }
+
+    public function uploadImage(Request $request)
+    {
+        $input = array('ImageBrowse' => $request->file('ImageBrowse'));
+        $rules = array(
+            'ImageBrowse' => 'required'
+        );
+        $validator = Validator::make($input, $rules);
+        if ($validator->fails())
+        {
+           return "";
+        }
+        else
+        {
+            $file= $request->file('ImageBrowse');
+
+            $destinationPath = "C:/xampp/htdocs/miss/admin/img/profile/";
+            $filename   =date("YmdHis") .'_'.$file->getClientOriginalName();
+            $fullFile=$destinationPath.$filename;
+                if(! File::exists($fullFile)) {
+                    $file->move($destinationPath, $filename);
+                    return $filename;
+
+                }
+               else
+               {
+                   return "";
+               }
+
+        }
+    }
+
+    public function getUploadImage($fileuploaded)
+    {
+        $filename=$fileuploaded;
+        return view('contestants.tempimage',compact('filename'));
+    }
+
+    public function uploadContestantImage(Request $request)
+    {
+        $input = array('ImageBrowse' => $request->file('ImageBrowse'));
+        $rules = array(
+            'ImageBrowse' => 'required'
+        );
+        $validator = Validator::make($input, $rules);
+        if ($validator->fails())
+        {
+            return "";
+        }
+        else
+        {
+
+            $files= $request->file('ImageBrowse');
+            $file_count = count($files);
+            // start count how many uploaded
+            $uploadcount = 0;
+            foreach($files as $file) {
+                $rules = array('file' => 'required|mimes:png,gif,jpeg,jpg'); //
+                $validator = Validator::make(array('file'=> $file), $rules);
+
+                if($validator->passes()){
+                    $destinationPath = 'C:/xampp/htdocs/miss/admin/img/contestant_galley/images/';
+                    $filename =$request->contestant_id."_". date("YmdHis") .'_'.$file->getClientOriginalName();
+                    $upload_success = $file->move($destinationPath, $filename);
+                    $uploadcount ++;
+
+                    $cg=new ContestantGallery;
+                    $cg->contestant_id=$request->contestant_id;
+                    $cg->gallery_path=$filename;
+                    $cg->created_by=Auth::user()->username;
+                    $cg->save();
+
+                }
+            }
+            if($uploadcount == $file_count){
+               $view="";
+                $contestant=Contestant::find($request->contestant_id);
+               return view('contestants.listimages',compact('contestant'));
+
+            }
+            else
+            {
+                return "";
+            }
+        }
+    }
+
+    public function removeContestantImage($id)
+    {
+        $cg=ContestantGallery::find($id);
+        if($cg != null && count($cg) >0)
+        {
+            $contestant=Contestant::find($cg->contestant_id);
+
+            // Delete a single file
+            $destinationPath = 'C:/xampp/htdocs/miss/admin/img/contestant_galley/images/';
+            $filename=$destinationPath.$cg->gallery_path;
+            $cg->delete();
+            File::delete($filename);
+            return view('contestants.listimages',compact('contestant'));
+        }
+    }
+
+
 }

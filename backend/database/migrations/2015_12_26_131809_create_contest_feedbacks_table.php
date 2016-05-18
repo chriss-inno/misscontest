@@ -14,6 +14,7 @@ class CreateContestFeedbacksTable extends Migration
     {
         Schema::create('contest_feedbacks', function (Blueprint $table) {
             $table->increments('id');
+
             $table->timestamps();
         });
     }

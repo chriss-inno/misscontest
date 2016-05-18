@@ -119,7 +119,14 @@ class UserController extends Controller
 
     public function login()
     {
-        return view('users.login');
+        if(Auth::guest())
+        {
+            return view('users.login');
+        }
+        else
+        {
+            return redirect('home');
+        }
     }
 
     //Post login for Authenticating users
