@@ -7,7 +7,8 @@
     <meta name="author" content="Innocent Christopher KIlogha">
     <meta name="keyword" content="Miss, Tanzania, Utalii, Urembo, Miss Tanzania, KIlimanjaro, Mbuga za wanayama, Vivutio">
     <link rel="shortcut icon" href="{{ asset('admin/img/logo.png') }}">
-    <title>Contest | @yield('page-title')</title>
+    <?php $siteSetup=\App\SiteSetup::all()->first();?>
+    <title>{{$siteSetup->site_name}} | @yield('page-title')</title>
     <!-- Bootstrap core CSS -->
      {!!HTML::style("admin/css/bootstrap.min.css" )!!}
      {!!HTML::style("admin/css/bootstrap-reset.css" )!!}
@@ -34,7 +35,7 @@
             <div data-original-title="Toggle Navigation" data-placement="right" class="fa fa-bars tooltips"></div>
         </div>
         <!--logo start-->
-        <a href="#" class="logo" >Contest</a>
+        <a href="#" class="logo" >{{$siteSetup->site_name}}</a>
         <!--logo end-->
         <div class="top-nav ">
             <ul class="nav pull-right top-menu">

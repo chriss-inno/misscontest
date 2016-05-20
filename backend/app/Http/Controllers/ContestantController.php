@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contest;
 use App\Contestant;
 use App\ContestantGallery;
 use Illuminate\Http\Request;
@@ -62,6 +63,8 @@ class ContestantController extends Controller
     public function store(Request $request)
     {
         //
+        $contestDefault=Contest::where('default','=','Yes')->get()->first();
+
         $contestant=new Contestant;
         $contestant->full_name=$request->full_name;
         $contestant->email=$request->email;
@@ -75,23 +78,37 @@ class ContestantController extends Controller
         $contestant->status="Active";
         $contestant->dob=$request->dob;
         $contestant->contest_year=date("Y");
+        if(count($contestDefault)>0 && $contestDefault != null && $contestDefault != "")
+        {
+            $contestant->contest_id=$contestDefault->id;
+        }
         $contestant->save();
 
 
         if($request->uploadedFileName !="")
         {
-            $newfile = "C:/xampp/htdocs/miss/admin/img/contestant_galley/".$request->uploadedFileName;
-            $oldfile = "C:/xampp/htdocs/miss/admin/img/profile/".$request->uploadedFileName;
+            $newfile = config('app.contestant_image_profile').$request->uploadedFileName;
+            $oldfile = config('app.contestant_image_profile_tmp').$request->uploadedFileName;
 
             if(! File::exists($newfile)) {
                 File::move($oldfile, $newfile);
                 $contestant->profile_image=$request->uploadedFileName;
                 $contestant->save();
+
+                //Copy to front folder
+                $file_namenw=config('app.contestant_front_image_profile').$request->uploadedFileName;
+                File::copy($newfile,$file_namenw);
             }
             else
             {
+                File::delete($newfile);
+                File::move($oldfile, $newfile);
                 $contestant->profile_image=$request->uploadedFileName;
                 $contestant->save();
+
+                //Copy to front folder
+                $file_namenw=config('app.contestant_front_image_profile').$request->uploadedFileName;
+                File::copy($newfile,$file_namenw);
             }
         }
 
@@ -134,7 +151,7 @@ class ContestantController extends Controller
     public function update(Request $request)
     {
         //
-
+        $contestDefault=Contest::where('default','=','Yes')->get()->first();
 
         $contestant= Contestant::find($request->id);
         $contestant->full_name=$request->full_name;
@@ -149,22 +166,35 @@ class ContestantController extends Controller
         $contestant->status="Active";
         $contestant->dob=$request->dob;
         $contestant->contest_year=date("Y");
+        if(count($contestDefault)>0 && $contestDefault != null && $contestDefault != "")
+        {
+            $contestant->contest_id=$contestDefault->id;
+        }
         $contestant->save();
 
         if($request->uploadedFileName !="")
         {
-            $newfile = "C:/xampp/htdocs/miss/admin/img/contestant_galley/".$request->uploadedFileName;
-            $oldfile = "C:/xampp/htdocs/miss/admin/img/profile/".$request->uploadedFileName;
+            $newfile = config('app.contestant_image_profile').$request->uploadedFileName;
+            $oldfile = config('app.contestant_image_profile_tmp').$request->uploadedFileName;
 
             if(! File::exists($newfile)) {
                 File::move($oldfile, $newfile);
                 $contestant->profile_image=$request->uploadedFileName;
                 $contestant->save();
+
+                ///
+                //Copy to front folder
+                $file_namenw=config('app.contestant_front_image_profile').$request->uploadedFileName;
+                File::copy($newfile,$file_namenw);
             }
             else
             {
                 $contestant->profile_image=$request->uploadedFileName;
                 $contestant->save();
+
+                //Copy to front folder
+                $file_namenw=config('app.contestant_front_image_profile').$request->uploadedFileName;
+                File::copy($newfile,$file_namenw);
             }
         }
 
@@ -182,6 +212,29 @@ class ContestantController extends Controller
     {
         //
         $contestant=Contestant::find($id);
+        if($contestant->photos != null && count($contestant->photos)>0)
+        {
+            foreach ($contestant->photos as $galley)
+            {
+
+                // Delete a single file
+                $admin_galley_path=config('app.contestant_image_galley');
+                $front_galley_path=config('app.contestant_front_image_galley');
+                $destinationPath = $admin_galley_path;
+                $filename=$destinationPath.$galley->gallery_path;
+                $filename2=$front_galley_path.$galley->gallery_path;
+
+                File::delete($filename);
+                File::delete($filename2);
+
+                $galley->delete();
+
+            }
+        }
+        $admin_profile_img=config('app.contestant_image_profile').$contestant->profile_image;
+        $front_profile_img=config('app.contestant_front_image_profile').$contestant->profile_image;
+        File::delete($admin_profile_img);
+        File::delete($front_profile_img);
         $contestant->delete();
     }
 
@@ -199,8 +252,9 @@ class ContestantController extends Controller
         else
         {
             $file= $request->file('ImageBrowse');
+            $tmp_image_path=config('app.contestant_image_profile_tmp');
 
-            $destinationPath = "C:/xampp/htdocs/miss/admin/img/profile/";
+            $destinationPath = $tmp_image_path;
             $filename   =date("YmdHis") .'_'.$file->getClientOriginalName();
             $fullFile=$destinationPath.$filename;
                 if(! File::exists($fullFile)) {
@@ -245,10 +299,18 @@ class ContestantController extends Controller
                 $validator = Validator::make(array('file'=> $file), $rules);
 
                 if($validator->passes()){
-                    $destinationPath = 'C:/xampp/htdocs/miss/admin/img/contestant_galley/images/';
+                    $admin_galley_path=config('app.contestant_image_galley');
+                    $front_galley_path=config('app.contestant_front_image_galley');
+
+                    $destinationPath = $admin_galley_path;
                     $filename =$request->contestant_id."_". date("YmdHis") .'_'.$file->getClientOriginalName();
                     $upload_success = $file->move($destinationPath, $filename);
                     $uploadcount ++;
+
+                    //Copy to front folder
+                    $file_namecp=$admin_galley_path.$filename;
+                    $file_namenw=$front_galley_path.$filename;
+                    File::copy($file_namecp,$file_namenw);
 
                     $cg=new ContestantGallery;
                     $cg->contestant_id=$request->contestant_id;
@@ -279,10 +341,14 @@ class ContestantController extends Controller
             $contestant=Contestant::find($cg->contestant_id);
 
             // Delete a single file
-            $destinationPath = 'C:/xampp/htdocs/miss/admin/img/contestant_galley/images/';
+            $admin_galley_path=config('app.contestant_image_galley');
+            $front_galley_path=config('app.contestant_front_image_galley');
+            $destinationPath = $admin_galley_path;
             $filename=$destinationPath.$cg->gallery_path;
+            $filename2=$front_galley_path.$cg->gallery_path;
             $cg->delete();
             File::delete($filename);
+            File::delete($filename2);
             return view('contestants.listimages',compact('contestant'));
         }
     }
