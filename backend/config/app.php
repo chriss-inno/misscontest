@@ -110,6 +110,12 @@ return [
 
     'log' => env('APP_LOG', 'single'),
 
+    'contestant_image_profile_tmp' => env('CONTESTANT_IMAGE_PROFILE_TMP', 'C:/xampp/htdocs/miss/admin/img/profile/'),
+    'contestant_image_profile' => env('CONTESTANT_IMAGE_PROFILE', 'C:/xampp/htdocs/miss/admin/img/contestant_galley/'),
+    'contestant_image_galley' => env('CONTESTANT_IMAGE_GALLEY', 'C:/xampp/htdocs/miss/admin/img/contestant_galley/images/'),
+    'contestant_front_image_profile' => env('CONTESTANT_FRONT_IMAGE_PROFILE', 'C:/xampp/htdocs/missfrontend/img/profile/'),
+    'contestant_front_image_galley' => env('CONTESTANT_FRONT_IMAGE_GALLEY', 'C:/xampp/htdocs/missfrontend/img/galley/'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

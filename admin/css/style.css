@@ -58,7 +58,7 @@ a, a:hover, a:focus {
     margin: 0;
     padding:20px 15px;
     text-align: left;
-    background: #41cac0;
+    background: #7087A3;
     border-radius: 5px 5px 0 0;
     -webkit-border-radius: 5px 5px 0 0;
     color: #fff;
@@ -343,8 +343,8 @@ ul.sidebar-menu li a.active i {
 
 .white-bg {
     color:#fff;
-    background: #41cac0;;
-    border-bottom: 1px solid #f1f2f7;
+    background: #f77b6f;;
+    border-bottom: 1px solid #f77b6f;
 }
 
 .wrapper {
@@ -552,7 +552,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     float: left;
     text-align: center;
     width: 100%;
-    background: #a9d96c;
+    background: #f77b6f;
     border-radius: 0 0 3px 3px;
 }
 
@@ -594,7 +594,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 
 .top-nav .username {
     font-size: 13px;
-    color: #555555;
+    color: #fff;
 }
 
 .top-nav ul.top-menu > li > a {
