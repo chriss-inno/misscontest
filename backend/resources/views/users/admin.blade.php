@@ -270,7 +270,7 @@
                                    <div class="desk yellow">
                                        @if(count($contest)> 0 && $contest !=null)
                                        <h3>{{$contest->full_name}}</h3>
-                                       <p>{{$contest->profile_note}}</p>
+                                       <p>{{substr(strip_tags($contest->profile_note),0,60)}}..</p>
                                            @endif
                                    </div>
                                </div>

@@ -27,11 +27,11 @@ a, a:hover, a:focus {
 }
 ::selection {
 
-    background: #FF6C60;
+    background: #FFA500;
     color: #fff;
 }
 ::-moz-selection {
-    background: #FF6C60;
+    background: #FFA500;
     color: #fff;
 }
 
@@ -251,7 +251,7 @@ ul.sidebar-menu li ul.sub li a {
 }
 
 ul.sidebar-menu li ul.sub li a:hover, ul.sidebar-menu li ul.sub li.active a {
-    color: #FF6C60;
+    color: #FFA500;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -310,11 +310,11 @@ ul.sidebar-menu li a i {
 }
 
 ul.sidebar-menu li a:hover i, ul.sidebar-menu li a:focus i {
-    color: #FF6C60;
+    color: #FFA500;
 }
 
 ul.sidebar-menu li a.active i {
-    color: #FF6C60;
+    color: #FFA500;
 }
 
 
@@ -343,8 +343,8 @@ ul.sidebar-menu li a.active i {
 
 .white-bg {
     color:#fff;
-    background: #f77b6f;;
-    border-bottom: 1px solid #f77b6f;
+    background: #FFA500;;
+    border-bottom: 1px solid #FFA500;
 }
 
 .wrapper {
@@ -368,7 +368,7 @@ a.logo:hover, a.logo:focus {
 }
 
 a.logo span {
-    color: #FF6C60;
+    color: #FFA500;
 }
 
 
@@ -452,7 +452,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .dropdown-menu.extended li p.red {
-    background-color: #ff6c60;
+    background-color: #FFA500;
     color: #fff;
 }
 
@@ -552,7 +552,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     float: left;
     text-align: center;
     width: 100%;
-    background: #f77b6f;
+    background: #FFA500;
     border-radius: 0 0 3px 3px;
 }
 
@@ -661,9 +661,9 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     border-top-color: #FCB322 !important;
 }
 .notify-arrow-red {
-    border-color: transparent transparent #ff6c60;
-    border-bottom-color: #ff6c60 !important;
-    border-top-color: #ff6c60 !important;
+    border-color: transparent transparent #FFA500;
+    border-bottom-color: #FFA500 !important;
+    border-top-color: #FFA500 !important;
 }
 .notify-arrow-green {
     border-color: transparent transparent #a9d86e;
@@ -774,7 +774,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .state-overview .red {
-    background: #ff6c60;
+    background: #FFA500;
 }
 
 .state-overview .yellow {
@@ -1060,7 +1060,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .badge.bg-important {
-    background: #ff6c60;
+    background: #FFA500;
 }
 
 .badge.bg-info {
@@ -1314,7 +1314,7 @@ h3.timeline-title {
 /*---revenue----*/
 
 .revenue-head {
-    background: #ff6c60;
+    background: #FFA500;
     -webkit-border-radius: 4px 4px 0px 0px;
     border-radius: 4px 4px 0px 0px;
     color: #fff;
@@ -1372,7 +1372,7 @@ h3.timeline-title {
 }
 
 .chart-info .increase {
-    background: #ff6c60;
+    background: #FFA500;
     width: 10px;
     height: 10px;
 }
@@ -1445,7 +1445,7 @@ h3.timeline-title {
     font-size: 16px;
 }
 .panel-footer.revenue-foot ul li a:hover i, .panel-footer.revenue-foot ul li.active a i {
-    color: #ff6c60;
+    color: #FFA500;
     display: block;
     font-size: 16px;
 }
@@ -1974,7 +1974,7 @@ a.mail-dropdown {
 }
 
 .btn-compose {
-    background: #ff6c60;
+    background: #FFA500;
     padding: 12px 0;
     text-align: center;
     width: 100%;
@@ -2230,7 +2230,7 @@ ul.inbox-pagination li {
 }
 
 .view-mail a {
-    color: #FF6C60;
+    color: #FFA500;
 }
 
 .attachment-mail {
@@ -2839,7 +2839,7 @@ ul.amounts li {
 
 .fc-state-active, .fc-state-active .fc-button-inner,
 .fc-state-hover, .fc-state-hover .fc-button-inner{
-    background:  #FF6C60 !important;
+    background:  #FFA500 !important;
     color: #fff !important;
 }
 
@@ -3025,7 +3025,7 @@ ul.amounts li {
 }
 
 .carousel-indicators .active {
-    background:#ff6c60;
+    background:#FFA500;
     height: 10px;
     margin: 1px;
     width: 10px;
@@ -3828,7 +3828,7 @@ table.sliders tr td {
 }
 
 .p-head {
-    color: #f77b6f;
+    color: #FFA500;
     font-weight: 400;
     font-size: 14px;
 }
@@ -4363,7 +4363,7 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
 
 
 .full-width .nav > li > a:hover, .full-width .nav  li.active a, .full-width .nav li.dropdown a:hover , .full-width .nav li.dropdown.open a:focus, .full-width .nav .open > a, .full-width  .nav .open > a:hover, .full-width  .nav .open > a:focus{
-    background-color: #F77B6F;
+    background-color: #FFA500;
     text-decoration: none;
     color: #fff;
     transition: all 0.3s ease 0s;
@@ -4480,7 +4480,7 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
 }
 
 .ui-sortable li.list-danger {
-    border-left: 3px solid #FF6C60;
+    border-left: 3px solid #FFA500;
 }
 
 .ui-sortable li.list-warning {
@@ -4775,7 +4775,7 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
 }
 
 .most-popular {
-    background: #f77b6f;
+    background: #FFA500;
     color: #fff;
 }
 
@@ -5123,7 +5123,7 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
 }
 
 .recent-highlight {
-    background: #FF6C60 !important;
+    background: #FFA500 !important;
 }
 
 
